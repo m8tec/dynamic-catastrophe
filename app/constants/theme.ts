@@ -23,3 +23,8 @@ export const COLORS = {
   dots: '#737373',
   dotsJ: '#444',
 } as const;
+
+export const TYPOGRAPHY = {
+  nodeFontFamily: 'var(--font-vesper), serif',
+  nodeFontSize: '17.5px',
+}

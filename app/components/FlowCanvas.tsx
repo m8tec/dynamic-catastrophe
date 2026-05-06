@@ -7,7 +7,6 @@ import '@xyflow/react/dist/style.css';
 import CircleNode from './nodes/CircleNode';
 import CloudNode from './nodes/CloudNode';
 import DiamondNode from './nodes/DiamondNode';
-import OptionNode from './nodes/OptionNode';
 import PlaceholderNode from './nodes/PlaceholderNode';
 import RectangleNode from './nodes/RectangleNode';
 import InteractiveEdge from './edges/InteractiveEdge';
@@ -21,7 +20,6 @@ const nodeTypes = {
   circle: CircleNode,
   cloud: CloudNode,
   diamond: DiamondNode,
-  option: OptionNode,
   placeholder: PlaceholderNode,
   rectangle: RectangleNode,
 };
@@ -32,17 +30,17 @@ const edgeTypes = {
 
 const rawNodes: Node[] = [
   { id: '1', type: 'diamond', position: { x: 0, y: 0 }, data: { label: 'Ist der Klimawandel real?' } },
-  { id: 'opt-no', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Nö!' } },
-  { id: 'opt-yes', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Ja!' } },
-  { id: 'opt-ignore', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Ich versuche, nicht daran zu denken' } },
-  { id: 'opt-ignore2', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Ich versuche, nicht daran zu denken' } },
+  { id: 'opt-no', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Nö!' } },
+  { id: 'opt-yes', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Ja!' } },
+  { id: 'opt-ignore', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Ich versuche, nicht daran zu denken' } },
+  { id: 'opt-ignore2', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Ich versuche, nicht daran zu denken' } },
   { id: '2', type: 'circle', position: { x: 0, y: 0 }, data: { label: 'Verdrängst du da vielleicht etwas?' } },
-  { id: 'opt-hmmm', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Hmmm...' } },
-  { id: 'opt-was', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Klima was?' } },
+  { id: 'opt-hmmm', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Hmmm...' } },
+  { id: 'opt-was', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Klima was?' } },
   { id: '3', type: 'cloud', position: { x: 0, y: 0 }, data: { label: 'Ich verdränge gar nichts!' } },
   { id: '4', type: 'diamond', position: { x: 0, y: 0 }, data: { label: 'Sind wir am Arsch?' } },
-  { id: 'opt-wen-meinst-du', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Wenn meinst du mit >>wir<<?' } },
-  { id: 'opt-noch-nicht', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Noch nicht, aber...' } },
+  { id: 'opt-wen-meinst-du', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Wenn meinst du mit >>wir<<?' } },
+  { id: 'opt-noch-nicht', type: 'rectangle', position: { x: 0, y: 0 }, data: { label: 'Noch nicht, aber...' } },
 ];
 
 const rawEdges: Edge[] = [

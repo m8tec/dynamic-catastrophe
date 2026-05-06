@@ -1,5 +1,5 @@
 import BaseNode from "./BaseNode";
-import { COLORS } from "@/app/constants/theme";
+import { COLORS, TYPOGRAPHY } from "@/app/constants/theme";
 
 interface CloudNodeProps {
   id: string;
@@ -66,7 +66,8 @@ export default function CloudNode({ id, data }: CloudNodeProps) {
         className="relative z-10 text-center text-xs sm:text-sm font-medium px-10 pointer-events-none transition-colors duration-300 break-words w-full"
         style={{
           color,
-          fontFamily: "Vesper Libre",
+          fontFamily: TYPOGRAPHY.nodeFontFamily,
+          fontSize: TYPOGRAPHY.nodeFontSize,
           lineHeight: "1.2",
         }}
       >

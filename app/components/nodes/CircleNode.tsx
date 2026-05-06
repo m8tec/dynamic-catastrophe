@@ -1,5 +1,5 @@
 import BaseNode from "./BaseNode";
-import { COLORS } from "@/app/constants/theme";
+import { COLORS, TYPOGRAPHY } from "@/app/constants/theme";
 
 interface CircleNodeProps {
   id: string;
@@ -58,7 +58,8 @@ export default function CircleNode({ id, data }: CircleNodeProps) {
         className="relative z-10 text-center text-sm font-medium px-6 pointer-events-none transition-colors duration-300"
         style={{
           color,
-          fontFamily: "Vesper Libre",
+          fontFamily: TYPOGRAPHY.nodeFontFamily,
+          fontSize: TYPOGRAPHY.nodeFontSize,
         }}
       >
         {data.label}

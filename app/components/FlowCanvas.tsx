@@ -92,6 +92,8 @@ export default function FlowCanvas() {
         edgeTypes={edgeTypes}
         fitView
         fitViewOptions={{ padding: 0.5 }}
+        nodesDraggable={false} 
+        nodesConnectable={false}
       >
         <Background color={COLORS.dots} gap={16} />
         <Controls className="bg-neutral-800 border-neutral-700 fill-neutral-300" />

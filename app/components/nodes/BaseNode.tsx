@@ -4,15 +4,16 @@ interface BaseNodeProps {
   id: string;
   isActive?: boolean;
   isSelectable?: boolean;
+  isDiscovered?: boolean;
   children: React.ReactNode;
   className?: string;
 }
 
-export default function BaseNode({ id, isActive, children, className = "" }: BaseNodeProps) {
+export default function BaseNode({ id, isActive, isSelectable, isDiscovered = true, children, className = "" }: BaseNodeProps) {
   const { setNodes, setEdges, getEdges } = useReactFlow();
 
   const onNodeClick = () => {
-    if (isActive) return;
+    if (isActive || !isDiscovered) return;
 
     const edges = getEdges();
     
@@ -28,6 +29,7 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
         } else if (nextNodeIds.includes(node.id)) {
             newData.isActive = false;
             newData.isSelectable = true;
+            newData.isDiscovered = true;
             if (newData.targetLabel) newData.label = newData.targetLabel;
         } else {
             newData.isActive = false;
@@ -42,6 +44,7 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
         
         if (edge.source === id) {
             newData.isSelectable = true;
+            newData.isDiscovered = true;
         } else {
             newData.isSelectable = false;
         }
@@ -50,9 +53,11 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
     }));
   };
 
+  const cursorClass = isSelectable ? 'cursor-pointer hover:scale-105 transition-all duration-300' : 'cursor-default';
+
   return (
     <div 
-      className={`relative flex items-center justify-center min-w-40 min-h-40 group ${!isActive ? 'cursor-pointer hover:scale-105 transition-all duration-300' : ''} ${className}`}
+      className={`relative flex items-center justify-center min-w-40 min-h-40 group ${cursorClass} ${className}`}
       onClick={onNodeClick}
     >
       <Handle type="target" position={Position.Top} id="top" className="opacity-0" />

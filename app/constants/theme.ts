@@ -3,18 +3,22 @@ export const COLORS = {
   nodeBackgroundInactive: 'transparent',
   nodeBackgroundInactiveDiamond: '#464646',
   nodeBackgroundUndiscovered: '#171717',
+  nodeBackgroundSelectableDiamond: '#562e32',
   nodeBorderInactive: '#737373',
+  nodeBorderInactiveOption: 'transparent',
+  nodeBorderUndiscovered: 'transparent',
   nodeTextActive: '#ffffff',
   nodeTextInactive: '#d0d0d0',
+  nodeTextUndiscovered: 'transparent',
   
-  optionBackgroundInactive: 'transparent',
-  optionTextActive: '#ffffff',
   optionTextNext: '#ff4056',
   optionTextDefault: '#c1c1c1',
 
   pathActive: '#a93543',
   pathInactive: '#5e5e5e',
   
-  background: '#171717',
-  dots: '#444',
+  background: '#282828',
+  backgroundJ: '#171717',
+  dots: '#737373',
+  dotsJ: '#444',
 } as const;

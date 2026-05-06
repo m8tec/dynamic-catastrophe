@@ -14,23 +14,30 @@ export const initializeFlowState = (nodes: Node[], edges: Edge[]) => {
     .filter((edge) => edge.source === startNodeId)
     .map((edge) => edge.target);
 
-  const initializedNodes = nodes.map((node) => ({
-    ...node,
-    data: {
-      ...node.data,
-      isActive: node.id === startNodeId,
-      isSelectable: selectableNodeIds.includes(node.id),
-      label: node.id === startNodeId && node.data.targetLabel 
-             ? node.data.targetLabel 
-             : (node.data.label || "")
-    },
-  }));
+  const initializedNodes = nodes.map((node) => {
+    const isStart = node.id === startNodeId;
+    const isNext = selectableNodeIds.includes(node.id);
+    
+    return {
+      ...node,
+      data: {
+        ...node.data,
+        isActive: isStart,
+        isSelectable: isNext,
+        isDiscovered: isStart || isNext, 
+        label: isStart && node.data.targetLabel 
+               ? node.data.targetLabel 
+               : (node.data.label || "")
+      },
+    };
+  });
 
   const initializedEdges = edges.map((edge) => ({
     ...edge,
     data: {
       ...edge.data,
       isSelectable: edge.source === startNodeId,
+      isDiscovered: edge.source === startNodeId,
       isClicked: false,
       isRevealed: false,
     },

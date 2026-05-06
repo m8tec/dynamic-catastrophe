@@ -6,15 +6,21 @@ interface OptionNodeProps {
   data: { 
     label: string;
     isActive?: boolean;
+    isDiscovered?: boolean;
     isSelectable?: boolean;
   };
 }
 
 export default function OptionNode({ id, data }: OptionNodeProps) {
   const isActive = data.isActive;
+  const isDiscovered = data.isDiscovered;
   const isSelectable = data.isSelectable;
 
-  let buttonClasses = "px-4 py-1.5 text-sm font-medium transition-all duration-300 font-vesper rounded-md ";
+  let buttonClasses = "px-4 py-1.5 text-sm font-medium transition-all duration-300 font-vesper ";
+
+  const backgroundColor = isActive ? COLORS.nodeBackgroundActive : isDiscovered ? COLORS.nodeBackgroundInactive : COLORS.nodeBackgroundUndiscovered;
+  const borderColor = isSelectable ? COLORS.nodeBackgroundActive : isDiscovered ? COLORS.nodeBorderInactiveOption : COLORS.nodeBorderUndiscovered;
+  const color = isActive ? COLORS.nodeTextActive : (isSelectable ? COLORS.optionTextNext : isDiscovered ? COLORS.optionTextDefault : COLORS.nodeTextUndiscovered);
 
   if (isActive) {
       buttonClasses += "shadow-lg";
@@ -27,11 +33,11 @@ export default function OptionNode({ id, data }: OptionNodeProps) {
   return (
     <BaseNode id={id} isActive={isActive} isSelectable={isSelectable} className="!min-w-0 !min-h-0 !w-max !h-max">
       <div className={buttonClasses} style={{
-        backgroundColor: isActive ? COLORS.nodeBackgroundActive : COLORS.optionBackgroundInactive,
-        borderColor: isSelectable ? COLORS.nodeBackgroundActive : 'transparent',
+        backgroundColor,
+        borderColor,
         borderWidth: '1px',
-        color: isActive ? COLORS.optionTextActive : (isSelectable ? COLORS.optionTextNext : COLORS.optionTextDefault),
-        fontFamily: 'Vesper Libre',
+        color,
+        fontFamily: 'Vesper Libre'
       }}>
         {data.label}
       </div>

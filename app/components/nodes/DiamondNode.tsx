@@ -42,8 +42,8 @@ export default function DiamondNode({ id, data }: DiamondNodeProps) {
             clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)' 
         }}
       ></div>
-
-      <div className="relative z-10 text-center text-sm font-medium px-6 pointer-events-none transition-all duration-700"
+      
+      <div className="relative z-10 text-center font-medium px-2 max-w-[130px] mx-auto leading-snug pointer-events-none transition-all duration-700"
         style={{
             color: textColor,
             fontFamily: TYPOGRAPHY.nodeFontFamily,

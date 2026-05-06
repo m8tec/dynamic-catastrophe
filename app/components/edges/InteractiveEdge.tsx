@@ -47,7 +47,7 @@ export default function InteractiveEdge({
   const isVisible = isDiscovered || isTeased;
   const showArrow = targetNode.type !== 'option';
 
-  let color = isSelectable ? COLORS.pathActive : COLORS.pathInactive;
+  let color = isSelectable ? COLORS.pathActive : isDiscovered ? COLORS.pathInactive : COLORS.nodeBackgroundUndiscovered;
 
   const sxCenter = (sourceNode.internals?.positionAbsolute?.x || sourceNode.position.x) + (sourceNode.measured?.width || 0) / 2;
   const syCenter = (sourceNode.internals?.positionAbsolute?.y || sourceNode.position.y) + (sourceNode.measured?.height || 0) / 2;

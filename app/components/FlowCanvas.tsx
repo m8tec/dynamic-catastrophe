@@ -7,6 +7,7 @@ import '@xyflow/react/dist/style.css';
 import CircleNode from './nodes/CircleNode';
 import CloudNode from './nodes/CloudNode';
 import DiamondNode from './nodes/DiamondNode';
+import OptionNode from './nodes/OptionNode';
 import PlaceholderNode from './nodes/PlaceholderNode';
 import RectangleNode from './nodes/RectangleNode';
 import InteractiveEdge from './edges/InteractiveEdge';
@@ -19,6 +20,7 @@ const nodeTypes = {
   circle: CircleNode,
   cloud: CloudNode,
   diamond: DiamondNode,
+  option: OptionNode,
   placeholder: PlaceholderNode,
   rectangle: RectangleNode,
 };
@@ -28,60 +30,24 @@ const edgeTypes = {
 };
 
 const initialNodes: Node[] = [
-  { 
-    id: '1', 
-    type: 'diamond', 
-    position: { x: 0, y: 0 }, 
-    data: { label: 'Ist der Klimawandel real?', isActive: true } 
-  },
-  { 
-    id: '2', 
-    type: 'circle', 
-    position: { x: 0, y: 0 }, 
-    data: { 
-        isActive: false,
-        targetLabel: 'Verdrängst du da vielleicht etwas?' 
-    }
-  },
-  { 
-    id: '3', 
-    type: 'cloud', 
-    position: { x: 0, y: 0 }, 
-    data: { 
-        isActive: false,
-        targetLabel: 'Ich verdränge gar nichts!' 
-    }
-  },
+  { id: '1', type: 'diamond', position: { x: 0, y: 0 }, data: { label: 'Ist der Klimawandel real?', isActive: true } },
+  
+  { id: 'opt-no', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Nö!', isSelectable: true } },
+  { id: 'opt-ignore', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Ich versuche nicht daran zu denken', isSelectable: true } },
+
+  { id: '2', type: 'circle', position: { x: 0, y: 0 }, data: { label: 'Verdrängst du da vielleicht etwas?' } },
+  { id: '3', type: 'cloud', position: { x: 0, y: 0 }, data: { label: 'Ich verdränge gar nichts!' } },
 ];
 
 const initialEdges: Edge[] = [
-  {
-    id: 'e1-2',
-    source: '1',
-    target: '2',
-    type: 'interactive',
-    data: { label: 'Nö!', isClicked: false, isSelectable: true },
-    animated: true,
-  },
-  {
-    id: 'e1-1',
-    source: '1',
-    target: '1',
-    sourceHandle: 'right',
-    targetHandle: 'top',
-    type: 'interactive',
-    data: { label: 'Ich versuche nicht daran zu denken', isClicked: false, isSelectable: true },
-  },
-  {
-    id: 'e2-3',
-    source: '2',
-    target: '3',
-    type: 'interactive',
-    data: { 
-      isClicked: false, 
-      isSelectable: false 
-    },
-  },
+  { id: 'e1-opt-no', source: '1', target: 'opt-no', type: 'interactive', data: { isSelectable: true } },
+  { id: 'e1-opt-ignore', source: '1', target: 'opt-ignore', type: 'interactive', data: { isSelectable: true } },
+
+  { id: 'e-opt-2', source: 'opt-no', target: '2', type: 'interactive' },
+
+  { id: 'e2-3', source: '2', target: '3', type: 'interactive' },
+  
+  { id: 'e-ignore-1', source: 'opt-ignore', target: '1', type: 'interactive' },
 ];
 
 const { layoutedNodes, layoutedEdges } = getLayoutedElements(initialNodes, initialEdges);

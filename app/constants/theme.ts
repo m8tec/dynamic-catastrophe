@@ -6,8 +6,7 @@ export const COLORS = {
   nodeBorderInactive: '#737373',
   nodeTextActive: '#ffffff',
   nodeTextInactive: '#d0d0d0',
-
-  optionBackgroundActive: '#ff4056',
+  
   optionBackgroundInactive: 'transparent',
   optionTextActive: '#ffffff',
   optionTextNext: '#ff4056',

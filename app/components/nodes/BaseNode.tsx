@@ -16,8 +16,8 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
 
     const edges = getEdges();
     
-    const autoForwardEdges = edges.filter(e => e.source === id && !e.data?.label);
-    const autoForwardTargetIds = autoForwardEdges.map(e => e.target);
+    const outgoingEdges = edges.filter(e => e.source === id);
+    const nextNodeIds = outgoingEdges.map(e => e.target);
 
     setNodes((nodes) => nodes.map(node => {
         let newData = { ...node.data };
@@ -25,12 +25,10 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
         if (node.id === id) {
             newData.isActive = true;
             newData.isSelectable = false;
-        } else if (autoForwardTargetIds.includes(node.id)) {
+        } else if (nextNodeIds.includes(node.id)) {
             newData.isActive = false;
             newData.isSelectable = true;
-            if (newData.targetLabel) {
-                newData.label = newData.targetLabel;
-            }
+            if (newData.targetLabel) newData.label = newData.targetLabel;
         } else {
             newData.isActive = false;
             newData.isSelectable = false;
@@ -42,29 +40,10 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
     setEdges((currentEdges) => currentEdges.map(edge => {
         let newData = { ...edge.data };
         
-        if (edge.source === id && edge.target === id) {
+        if (edge.source === id) {
             newData.isSelectable = true;
-            newData.isRevealed = false;
-            newData.isClicked = false;
-        } else if (edge.target === id) {
-            newData.isClicked = true; 
-            newData.isRevealed = false;
-            newData.isSelectable = false;
-        } else if (edge.source === id) {
-            if (!edge.data?.label) {
-                newData.isClicked = true; 
-                newData.isSelectable = false;
-                newData.isRevealed = true;
-            } else {
-                newData.isSelectable = true;
-                newData.isRevealed = false; 
-                newData.isClicked = false;  
-            }
-
         } else {
             newData.isSelectable = false;
-            newData.isRevealed = false;
-            newData.isClicked = false; 
         }
         
         return { ...edge, data: newData };

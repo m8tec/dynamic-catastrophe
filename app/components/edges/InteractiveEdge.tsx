@@ -12,17 +12,24 @@ export default function InteractiveEdge({
   const isRevealed = data?.isRevealed as boolean;     
   const isSelectable = data?.isSelectable as boolean; 
 
+  const hasLabel = Boolean(data?.label);
+
   let topColor: string = COLORS.pathInactive;
   let bottomColor: string = COLORS.pathInactive; 
 
-  if (isRevealed) {
-      // 2. Kante wurde gewählt, wartet auf Node-Klick -> "Strom" fließt vom Button zur NEUEN Node
-      topColor = COLORS.pathInactive;
-      bottomColor = COLORS.pathActive;
-  } else if (isSelectable) {
-      // 3. Option ist anwählbar -> "Strom" fließt von ALTER Node in den Button
-      topColor = COLORS.pathActive;
-      bottomColor = COLORS.pathInactive;
+  if (!hasLabel) {
+      if (isRevealed || isSelectable) {
+          topColor = COLORS.pathActive;
+          bottomColor = COLORS.pathActive;
+      }
+  } else {
+      if (isRevealed) {
+          topColor = COLORS.pathInactive;
+          bottomColor = COLORS.pathActive;
+      } else if (isSelectable) {
+          topColor = COLORS.pathActive;
+          bottomColor = COLORS.pathInactive;
+      }
   }
 
   const edgeStyle = {
@@ -93,27 +100,29 @@ export default function InteractiveEdge({
 
       <BaseEdge path={edgePath} markerEnd={markerEnd} style={edgeStyle} />
       
-      <EdgeLabelRenderer>
-        <div
-          style={{
-            position: 'absolute',
-            transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
-            pointerEvents: 'all',
-            zIndex: (isRevealed || isClicked) ? 0 : 1000,
-          }}
-          className="nodrag nopan"
-        >
-          <button disabled={isRevealed || isClicked} className={buttonClasses} onClick={onEdgeClick}
-          style={{
-            backgroundColor: isRevealed ? COLORS.optionBackgroundActive : COLORS.optionBackgroundInactive,
-            color: isSelectable ? COLORS.optionTextNext : COLORS.optionTextDefault,
-            fontFamily: 'Vesper Libre',
-          }}
+      {hasLabel && (
+        <EdgeLabelRenderer>
+          <div
+            style={{
+              position: 'absolute',
+              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
+              pointerEvents: 'all',
+              zIndex: (isRevealed || isClicked) ? 0 : 1000,
+            }}
+            className="nodrag nopan"
           >
-            {data?.label as string}
-          </button>
-        </div>
-      </EdgeLabelRenderer>
+            <button disabled={isRevealed || isClicked} className={buttonClasses} onClick={onEdgeClick}
+            style={{
+              backgroundColor: isRevealed ? COLORS.optionBackgroundActive : COLORS.optionBackgroundInactive,
+              color: isRevealed ? COLORS.optionTextActive : (isSelectable ? COLORS.optionTextNext : COLORS.optionTextDefault),
+              border: isSelectable ? `1px solid ${COLORS.nodeBackgroundActive}` : 'none'
+            }}
+            >
+              {data?.label as string}
+            </button>
+          </div>
+        </EdgeLabelRenderer>
+      )}
     </>
   );
 }

@@ -9,21 +9,37 @@ interface BaseNodeProps {
 }
 
 export default function BaseNode({ id, isActive, children, className = "" }: BaseNodeProps) {
-  const { setNodes, setEdges } = useReactFlow();
+  const { setNodes, setEdges, getEdges } = useReactFlow();
 
   const onNodeClick = () => {
     if (isActive) return;
 
-    setNodes((nodes) => nodes.map(node => ({
-        ...node,
-        data: { 
-          ...node.data, 
-          isActive: node.id === id,
-          isSelectable: false 
-        }
-    })));
+    const edges = getEdges();
+    
+    const autoForwardEdges = edges.filter(e => e.source === id && !e.data?.label);
+    const autoForwardTargetIds = autoForwardEdges.map(e => e.target);
 
-    setEdges((edges) => edges.map(edge => {
+    setNodes((nodes) => nodes.map(node => {
+        let newData = { ...node.data };
+
+        if (node.id === id) {
+            newData.isActive = true;
+            newData.isSelectable = false;
+        } else if (autoForwardTargetIds.includes(node.id)) {
+            newData.isActive = false;
+            newData.isSelectable = true;
+            if (newData.targetLabel) {
+                newData.label = newData.targetLabel;
+            }
+        } else {
+            newData.isActive = false;
+            newData.isSelectable = false;
+        }
+
+        return { ...node, data: newData };
+    }));
+
+    setEdges((currentEdges) => currentEdges.map(edge => {
         let newData = { ...edge.data };
         
         if (edge.source === id && edge.target === id) {
@@ -35,9 +51,16 @@ export default function BaseNode({ id, isActive, children, className = "" }: Bas
             newData.isRevealed = false;
             newData.isSelectable = false;
         } else if (edge.source === id) {
-            newData.isSelectable = true;
-            newData.isRevealed = false; 
-            newData.isClicked = false;  
+            if (!edge.data?.label) {
+                newData.isClicked = true; 
+                newData.isSelectable = false;
+                newData.isRevealed = true;
+            } else {
+                newData.isSelectable = true;
+                newData.isRevealed = false; 
+                newData.isClicked = false;  
+            }
+
         } else {
             newData.isSelectable = false;
             newData.isRevealed = false;

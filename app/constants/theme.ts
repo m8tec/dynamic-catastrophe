@@ -8,7 +8,8 @@ export const COLORS = {
   nodeTextInactive: '#d0d0d0',
 
   optionBackgroundActive: '#ff4056',
-  optionBackgroundInactive: 'rgba(0,0,0,0)',
+  optionBackgroundInactive: 'transparent',
+  optionTextActive: '#ffffff',
   optionTextNext: '#ff4056',
   optionTextDefault: '#c1c1c1',
 

@@ -13,6 +13,8 @@ import InteractiveEdge from './edges/InteractiveEdge';
 
 import { COLORS } from '@/app/constants/theme';
 
+import { getLayoutedElements } from '@/utils/layout';
+
 const nodeTypes = {
   circle: CircleNode,
   cloud: CloudNode,
@@ -29,13 +31,13 @@ const initialNodes: Node[] = [
   { 
     id: '1', 
     type: 'diamond', 
-    position: { x: 250, y: 100 }, 
+    position: { x: 0, y: 0 }, 
     data: { label: 'Ist der Klimawandel real?', isActive: true } 
   },
   { 
     id: '2', 
     type: 'circle', 
-    position: { x: 250, y: 400 }, 
+    position: { x: 0, y: 0 }, 
     data: { 
         isActive: false,
         targetLabel: 'Verdrängst du da vielleicht etwas?' 
@@ -44,7 +46,7 @@ const initialNodes: Node[] = [
   { 
     id: '3', 
     type: 'cloud', 
-    position: { x: 250, y: 500 }, 
+    position: { x: 0, y: 0 }, 
     data: { 
         isActive: false,
         targetLabel: 'Ich verdränge gar nichts!' 
@@ -70,11 +72,23 @@ const initialEdges: Edge[] = [
     type: 'interactive',
     data: { label: 'Ich versuche nicht daran zu denken', isClicked: false, isSelectable: true },
   },
+  {
+    id: 'e2-3',
+    source: '2',
+    target: '3',
+    type: 'interactive',
+    data: { 
+      isClicked: false, 
+      isSelectable: false 
+    },
+  },
 ];
 
+const { layoutedNodes, layoutedEdges } = getLayoutedElements(initialNodes, initialEdges);
+
 export default function FlowCanvas() {
-  const [nodes, setNodes] = useState<Node[]>(initialNodes);
-  const [edges, setEdges] = useState<Edge[]>(initialEdges);
+  const [nodes, setNodes] = useState<Node[]>(layoutedNodes);
+  const [edges, setEdges] = useState<Edge[]>(layoutedEdges);
 
   const onNodesChange = useCallback((changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)), []);
   const onEdgesChange = useCallback((changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)), []);

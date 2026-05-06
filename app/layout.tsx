@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Vesper_Libre } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -10,6 +10,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const vesperLibre = Vesper_Libre({
+  variable: "--font-vesper-libre",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {

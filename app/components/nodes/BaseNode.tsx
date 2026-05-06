@@ -31,12 +31,14 @@ export default function BaseNode({
       invalidClickCount.current += 1;
 
       if (invalidClickCount.current >= 3) {
-        alert("Wähle zuerst ein Objekt aus, was hierher zeigt, um dieses Element sichtbar zu machen.");
+        alert(
+          "Wähle zuerst ein Objekt aus, was hierher zeigt, um dieses Element sichtbar zu machen.",
+        );
         invalidClickCount.current = 0;
       }
 
       const edges = getEdges();
-      
+
       const incomingEdges = edges.filter((e) => e.target === id);
 
       incomingEdges.forEach((edge) => {
@@ -53,7 +55,7 @@ export default function BaseNode({
     }
 
     if (isActive) return;
-    
+
     invalidClickCount.current = 0;
 
     const edges = getEdges();
@@ -83,7 +85,9 @@ export default function BaseNode({
           newData.isSelectable = false;
 
           if (!newData.isDiscovered) {
-            newData.isTeased = teasedNodeIds.includes(node.id);
+            if (teasedNodeIds.includes(node.id)) {
+              newData.isTeased = true;
+            }
           }
         }
 
@@ -101,8 +105,8 @@ export default function BaseNode({
           newData.isTeased = false;
         } else {
           newData.isSelectable = false;
-          if (!newData.isDiscovered) {
-            newData.isTeased = nextNodeIds.includes(edge.source);
+          if (nextNodeIds.includes(edge.source)) {
+            newData.isTeased = true;
           }
         }
 

@@ -8,7 +8,6 @@ export const initializeFlowState = (nodes: Node[], edges: Edge[]) => {
   )[0];
 
   const startNodeId = startNode.id;
-  console.log("Startknoten ID:", startNodeId);
 
   const selectableNodeIds = edges
     .filter((edge) => edge.source === startNodeId)

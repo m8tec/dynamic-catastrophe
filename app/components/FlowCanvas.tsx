@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { ReactFlow, Controls, Background, applyNodeChanges, applyEdgeChanges, Node, Edge, NodeChange, EdgeChange } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -14,6 +14,7 @@ import InteractiveEdge from './edges/InteractiveEdge';
 
 import { COLORS } from '@/app/constants/theme';
 
+import { initializeFlowState } from '@/utils/flowInit';
 import { getLayoutedElements } from '@/utils/layout';
 
 const nodeTypes = {
@@ -29,35 +30,41 @@ const edgeTypes = {
   interactive: InteractiveEdge,
 };
 
-const initialNodes: Node[] = [
-  { id: '1', type: 'diamond', position: { x: 0, y: 0 }, data: { label: 'Ist der Klimawandel real?', isActive: true } },
-  
-  { id: 'opt-no', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Nö!', isSelectable: true } },
-  { id: 'opt-ignore', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Ich versuche nicht daran zu denken', isSelectable: true } },
-
+const rawNodes: Node[] = [
+  { id: '1', type: 'diamond', position: { x: 0, y: 0 }, data: { label: 'Ist der Klimawandel real?' } },
+  { id: 'opt-no', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Nö!' } },
+  { id: 'opt-ignore', type: 'option', position: { x: 0, y: 0 }, data: { label: 'Ich versuche nicht daran zu denken' } },
   { id: '2', type: 'circle', position: { x: 0, y: 0 }, data: { label: 'Verdrängst du da vielleicht etwas?' } },
   { id: '3', type: 'cloud', position: { x: 0, y: 0 }, data: { label: 'Ich verdränge gar nichts!' } },
 ];
 
-const initialEdges: Edge[] = [
-  { id: 'e1-opt-no', source: '1', target: 'opt-no', type: 'interactive', data: { isSelectable: true } },
-  { id: 'e1-opt-ignore', source: '1', target: 'opt-ignore', type: 'interactive', data: { isSelectable: true } },
-
+const rawEdges: Edge[] = [
+  { id: 'e1-opt-no', source: '1', target: 'opt-no', type: 'interactive' },
+  { id: 'e1-opt-ignore', source: '1', target: 'opt-ignore', type: 'interactive' },
   { id: 'e-opt-2', source: 'opt-no', target: '2', type: 'interactive' },
-
   { id: 'e2-3', source: '2', target: '3', type: 'interactive' },
-  
   { id: 'e-ignore-1', source: 'opt-ignore', target: '1', type: 'interactive' },
 ];
 
-const { layoutedNodes, layoutedEdges } = getLayoutedElements(initialNodes, initialEdges);
+const { nodes: preparedNodes, edges: preparedEdges } = initializeFlowState(rawNodes, rawEdges);
+const { layoutedNodes, layoutedEdges } = getLayoutedElements(preparedNodes, preparedEdges);
 
 export default function FlowCanvas() {
   const [nodes, setNodes] = useState<Node[]>(layoutedNodes);
   const [edges, setEdges] = useState<Edge[]>(layoutedEdges);
+  
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const onNodesChange = useCallback((changes: NodeChange[]) => setNodes((nds) => applyNodeChanges(changes, nds)), []);
   const onEdgesChange = useCallback((changes: EdgeChange[]) => setEdges((eds) => applyEdgeChanges(changes, eds)), []);
+  
+  if (!isMounted) {
+    return <div className="w-full h-screen bg-neutral-900" />;
+  }
 
   return (
     <div className="w-full h-screen bg-neutral-900">

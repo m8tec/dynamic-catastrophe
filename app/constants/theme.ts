@@ -6,6 +6,7 @@ export const COLORS = {
   nodeBackgroundSelectableDiamond: '#562e32',
   nodeBorderInactive: '#737373',
   nodeBorderInactiveOption: 'transparent',
+  nodeBorderSelectableOption: 'transparent',
   nodeBorderUndiscovered: 'transparent',
   nodeTextActive: '#ffffff',
   nodeTextInactive: '#d0d0d0',

@@ -6,13 +6,14 @@ interface DiamondNodeProps {
   data: { 
     label: string;
     isActive?: boolean;
-    isSelectable?: boolean;
     isDiscovered?: boolean;
+    isSelectable?: boolean;
+    isTeased?: boolean;
   };
 }
 
 export default function DiamondNode({ id, data }: DiamondNodeProps) {
-  const { isActive, isSelectable, isDiscovered } = data;
+  const { isActive, isDiscovered, isSelectable, isTeased } = data;
 
   const bgColor = isDiscovered 
     ? (isActive ? COLORS.nodeBackgroundActive : isSelectable ? COLORS.nodeBackgroundSelectableDiamond : COLORS.nodeBackgroundInactiveDiamond)
@@ -25,7 +26,7 @@ export default function DiamondNode({ id, data }: DiamondNodeProps) {
   const textColor = isActive ? COLORS.nodeTextActive : (isDiscovered ? COLORS.nodeTextInactive : COLORS.nodeTextUndiscovered);
 
   return (
-    <BaseNode id={id} isActive={isActive} isSelectable={isSelectable} isDiscovered={isDiscovered}>
+    <BaseNode id={id} isActive={isActive} isSelectable={isSelectable} isDiscovered={isDiscovered} isTeased={isTeased}>
       <div 
         className="absolute inset-0 transition-all duration-700"
         style={{

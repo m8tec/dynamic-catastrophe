@@ -7,6 +7,10 @@ export default function InteractiveEdge({
   const [edgePath] = getBezierPath({ sourceX, sourceY, sourcePosition, targetX, targetY, targetPosition });
   
   const isSelectable = data?.isSelectable as boolean; 
+  const isDiscovered = data?.isDiscovered as boolean;
+  const isTeased = data?.isTeased as boolean;
+
+  const isVisible = isDiscovered || isTeased;
 
   let color = isSelectable ? COLORS.pathActive : COLORS.pathInactive;
 
@@ -14,7 +18,8 @@ export default function InteractiveEdge({
     ...style,
     stroke: `url(#gradient-${id})`,
     strokeWidth: isSelectable ? 2.5 : 2,
-    transition: 'stroke-width 0.3s ease',
+    opacity: isVisible ? 1 : 0,
+    transition: 'stroke-width 0.3s ease, opacity 0.7s ease',
   };
 
   return (

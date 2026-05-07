@@ -55,7 +55,7 @@ export default async function PlayPage({
   return (
     <main className="w-full h-screen bg-[#121212]">
       {data ? (
-        <FlowCanvas 
+        <FlowCanvas
           initialNodes={data.nodes} 
           initialEdges={data.edges}
           isDynamicMode={false}

@@ -5,12 +5,23 @@ import { Node, Edge } from "@xyflow/react";
 import FlowCanvas from "./FlowCanvas";
 import LoadingScreen from "./LoadingScreen";
 import { parseAiToFlow } from "@/utils/aiGraphParser";
+import { ThemeName } from "@/constants/theme";
 
 export default function DynamicFlowLoader({ topic }: { topic: string }) {
   const [isLoading, setIsLoading] = useState(true);
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  const [aiData, setAiData] = useState<{
+    title: string;
+    description: string;
+    theme: ThemeName;
+  }>({
+    title: "Generiere...",
+    description: "...",
+    theme: "default",
+  });
 
   const hasFetched = useRef(false);
 
@@ -20,10 +31,10 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
 
     async function fetchAiScenario() {
       try {
-        const res = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ topic })
+        const res = await fetch("/api/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ topic }),
         });
 
         if (!res.ok) throw new Error(`API Fehler: ${res.status}`);
@@ -32,17 +43,28 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
         console.log("Frontend empfängt:", data);
 
         if (data.scenario) {
-          const { nodes: flowNodes, edges: flowEdges } = parseAiToFlow(data.scenario);
+          const { nodes: flowNodes, edges: flowEdges } = parseAiToFlow(
+            data.scenario,
+          );
+
+          setAiData({
+            title: data.title || "Ohne Titel",
+            description:
+              data.description || "Die KI schweigt über die Details.",
+            theme: data.theme || "blood",
+          });
+
           setNodes(flowNodes);
           setEdges(flowEdges);
           setIsLoading(false);
         } else {
           throw new Error("KI hat kein 'scenario' Array geliefert.");
         }
-
       } catch (err) {
         console.error("Fetch Error:", err);
-        setError("Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.");
+        setError(
+          "Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.",
+        );
         setIsLoading(false);
       }
     }
@@ -61,6 +83,19 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
   if (isLoading) {
     return <LoadingScreen topic={topic} />;
   }
-  
-  return <FlowCanvas initialNodes={nodes} initialEdges={edges} isDynamicMode={true} startNodeId="q1" />;
+
+  return (
+    <FlowCanvas
+      initialNodes={nodes}
+      initialEdges={edges}
+      isDynamicMode={true}
+      startNodeId="q1"
+      theme={aiData.theme}
+      sidebarData={{
+        title: aiData.title,
+        description: aiData.description,
+        prompt: topic,
+      }}
+    />
+  );
 }

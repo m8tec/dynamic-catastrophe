@@ -31,7 +31,7 @@ const vesperLibre = localFont({
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "Start | Dynamic Catastrophe",
+    title: "Home | Dynamic Catastrophe",
     description: "Interaktive Entscheidungsbäume. Konfrontiere dich mit den Konsequenzen deiner Entscheidungen in einer dynamischen Katastrophensimulation.",
   };
 }

@@ -1,6 +1,7 @@
+import { ScenarioMetadata } from '@/types/scenario';
 import { Node, Edge } from '@xyflow/react';
 
-export const metadata = {
+export const metadata : ScenarioMetadata = {
   title: "Klimawandel: Die nackte Wahrheit",
   description: "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'.",
   teaserImage: "/images/scenarios/climate-change/teaser.png",

@@ -59,6 +59,11 @@ export default async function PlayPage({
           initialNodes={data.nodes} 
           initialEdges={data.edges}
           isDynamicMode={false}
+          sidebarData={{
+            title: data.metadata?.title || 'Unbekanntes Szenario',
+            description: data.metadata?.description || 'Keine Aufzeichnungen vorhanden.',
+            teaserImage: data.metadata?.teaserImage,
+          }}
           theme={data.metadata?.theme}
         />
       ) : (

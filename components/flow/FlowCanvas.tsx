@@ -14,13 +14,16 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
-import CircleNode from "./nodes/CircleNode";
-import CloudNode from "./nodes/CloudNode";
-import DiamondNode from "./nodes/DiamondNode";
-import PlaceholderNode from "./nodes/PlaceholderNode";
-import OptionNode from "./nodes/OptionNode";
+import CircleNode from "@/components/flow/nodes/CircleNode";
+import CloudNode from "@/components/flow/nodes/CloudNode";
+import DiamondNode from "@/components/flow/nodes/DiamondNode";
+import PlaceholderNode from "@/components/flow/nodes/PlaceholderNode";
+import OptionNode from "@/components/flow/nodes/OptionNode";
+import RectangleNode from "@/components/flow/nodes/RectangleNode";
+
 import InteractiveEdge from "./edges/InteractiveEdge";
-import RectangleNode from "./nodes/RectangleNode";
+
+import ScenarioSidebar, { SidebarData } from '@/components/flow/ScenarioSlider';
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { THEMES, ThemeName } from "@/constants/theme";
@@ -46,6 +49,7 @@ interface FlowCanvasProps {
   initialEdges: Edge[];
   startNodeId?: string;
   isDynamicMode?: boolean;
+  sidebarData?: SidebarData;
   theme?: ThemeName;
 }
 
@@ -53,6 +57,7 @@ export default function FlowCanvas({
   initialNodes,
   initialEdges,
   startNodeId,
+  sidebarData,
   theme,
   isDynamicMode = false,
 }: FlowCanvasProps) {
@@ -104,9 +109,13 @@ export default function FlowCanvas({
   return (
     <ThemeProvider theme={theme || "default"}>
       <div
-        className="w-full h-screen"
+        className="w-full h-screen relative overflow-hidden"
         style={{ backgroundColor: currentTheme.background }}
       >
+        {sidebarData && (
+          <ScenarioSidebar data={sidebarData} isDynamic={isDynamicMode} />
+        )}
+
         <ReactFlow
           nodes={nodes}
           edges={edges}

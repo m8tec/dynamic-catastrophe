@@ -1,5 +1,6 @@
 import BaseNode from "./BaseNode";
-import { COLORS, TYPOGRAPHY } from "@/constants/theme";
+import { TYPOGRAPHY } from "@/constants/theme";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CircleNodeProps {
   id: string;
@@ -17,6 +18,8 @@ export default function CircleNode({ id, data }: CircleNodeProps) {
   const isDiscovered = data.isDiscovered;
   const isSelectable = data.isSelectable;
   const isTeased = data.isTeased;
+
+  const COLORS = useTheme();
 
   const backgroundColor = isActive
     ? COLORS.nodeBackgroundActive

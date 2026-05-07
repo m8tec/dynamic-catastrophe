@@ -4,6 +4,7 @@ export const metadata = {
   title: "Klimawandel: Die nackte Wahrheit",
   description: "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'.",
   teaserImage: "/images/scenarios/climate-change/teaser.png",
+  theme: "default"
 };
 
 export const nodes: Node[] = [

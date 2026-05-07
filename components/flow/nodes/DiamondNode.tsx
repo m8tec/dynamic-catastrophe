@@ -1,5 +1,6 @@
 import BaseNode from './BaseNode';
-import { COLORS, TYPOGRAPHY } from '@/constants/theme';
+import { TYPOGRAPHY } from '@/constants/theme';
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface DiamondNodeProps {
   id: string;
@@ -14,6 +15,8 @@ interface DiamondNodeProps {
 
 export default function DiamondNode({ id, data }: DiamondNodeProps) {
   const { isActive, isDiscovered, isSelectable, isTeased } = data;
+
+  const COLORS = useTheme();
 
   const bgColor = isDiscovered 
     ? (isActive ? COLORS.nodeBackgroundActive : isSelectable ? COLORS.nodeBackgroundSelectableDiamond : COLORS.nodeBackgroundInactiveDiamond)

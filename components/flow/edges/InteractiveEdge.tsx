@@ -1,5 +1,5 @@
 import { BaseEdge, EdgeProps, useInternalNode } from '@xyflow/react';
-import { COLORS } from '@/constants/theme';
+import { useTheme } from "@/contexts/ThemeContext";
 
 function getPointOnBoundary(node: any, angle: number) {
   const w = (node.measured?.width || node.width || 0) / 2;
@@ -34,6 +34,8 @@ export default function InteractiveEdge({
   const targetNode = useInternalNode(target);
 
   if (!sourceNode || !targetNode) return null;
+
+  const COLORS = useTheme();
 
   const isSelectable = data?.isSelectable as boolean; 
   const isDiscovered = data?.isDiscovered as boolean;

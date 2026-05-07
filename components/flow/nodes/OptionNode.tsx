@@ -1,5 +1,6 @@
 import BaseNode from "./BaseNode";
-import { COLORS, TYPOGRAPHY } from "@/constants/theme";
+import { TYPOGRAPHY } from "@/constants/theme";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface OptionNodeProps {
   id: string;
@@ -17,6 +18,8 @@ export default function OptionNode({ id, data }: OptionNodeProps) {
   const isDiscovered = data.isDiscovered;
   const isSelectable = data.isSelectable;
   const isTeased = data.isTeased;
+
+  const COLORS = useTheme();
 
   let buttonClasses =
     "px-4 py-1.5 text-sm font-medium transition-all duration-300 font-vesper ";

@@ -59,6 +59,7 @@ export default async function PlayPage({
           initialNodes={data.nodes} 
           initialEdges={data.edges}
           isDynamicMode={false}
+          theme={data.metadata?.theme}
         />
       ) : (
         <div className="w-full h-screen flex items-center justify-center bg-[#121212] text-white">

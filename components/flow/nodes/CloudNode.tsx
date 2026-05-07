@@ -1,5 +1,6 @@
 import BaseNode from "./BaseNode";
-import { COLORS, TYPOGRAPHY } from "@/constants/theme";
+import { TYPOGRAPHY } from "@/constants/theme";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface CloudNodeProps {
   id: string;
@@ -17,6 +18,8 @@ export default function CloudNode({ id, data }: CloudNodeProps) {
   const isDiscovered = data.isDiscovered;
   const isSelectable = data.isSelectable;
   const isTeased = data.isTeased;
+
+  const COLORS = useTheme();
 
   const cloudPath =
     "M228 780.001C214.75 780.001 204 769.251 204 756.001C204 745.401 210.5 736.451 220.58 733.171C220 702.001 260 696.001 276 708.001C284 690.001 324 696.001 324 714.001C348 708.001 372 732.001 356 762.001C372 786.001 356 816.001 324 804.001C316 819.601 284 819.601 276 804.001C260 816.001 228 810.001 228 780.001Z";

@@ -46,7 +46,13 @@ Antworte AUSSCHLIESSLICH mit einem validen JSON-Objekt in exakt diesem Format:
   ]
 }
 `;
-    const ollamaRes = await fetch('http://192.168.178.58:11434/api/chat', {
+    const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL;
+
+    if (!OLLAMA_BASE_URL) {
+      throw new Error('OLLAMA_BASE_URL is not defined in environment variables');
+    }
+
+    const ollamaRes = await fetch(`${OLLAMA_BASE_URL}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

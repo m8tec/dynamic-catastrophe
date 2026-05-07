@@ -1,9 +1,5 @@
-import FlowCanvas from "./components/FlowCanvas";
+import { redirect } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <main className="w-full h-screen">
-      <FlowCanvas />
-    </main>
-  );
+  redirect('/play?mode=static&scenario=climate-change');
 }

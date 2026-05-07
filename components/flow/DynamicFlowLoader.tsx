@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Node, Edge } from "@xyflow/react";
 import FlowCanvas from "./FlowCanvas";
 import LoadingScreen from "./LoadingScreen";
+import { parseAiToFlow } from "@/utils/aiGraphParser";
 
 export default function DynamicFlowLoader({ topic }: { topic: string }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,39 +12,42 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
   const [edges, setEdges] = useState<Edge[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const hasFetched = useRef(false);
+
   useEffect(() => {
-    let isMounted = true;
+    if (hasFetched.current) return;
+    hasFetched.current = true;
 
     async function fetchAiScenario() {
       try {
-        // const res = await fetch('/api/generate', { method: 'POST', body: JSON.stringify({ topic }) });
-        // const data = await res.json();
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ topic })
+        });
 
-        await new Promise((resolve) => setTimeout(resolve, 8000));
+        if (!res.ok) throw new Error(`API Fehler: ${res.status}`);
 
-        if (!isMounted) return;
+        const data = await res.json();
+        console.log("Frontend empfängt:", data);
 
-        // Mock
-        setNodes([
-          { id: "1", type: "diamond", position: { x: 0, y: 0 }, data: { label: `Ist ${topic} unser Ende?` } },
-          { id: "opt-1", type: "rectangle", position: { x: 0, y: 0 }, data: { label: "Ziemlich sicher." } },
-        ]);
-        setEdges([
-          { id: "e1", source: "1", target: "opt-1", type: "interactive" }
-        ]);
-        
-        setIsLoading(false);
-      } catch (err) {
-        if (isMounted) {
-          setError("Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.");
+        if (data.scenario) {
+          const { nodes: flowNodes, edges: flowEdges } = parseAiToFlow(data.scenario);
+          setNodes(flowNodes);
+          setEdges(flowEdges);
           setIsLoading(false);
+        } else {
+          throw new Error("KI hat kein 'scenario' Array geliefert.");
         }
+
+      } catch (err) {
+        console.error("Fetch Error:", err);
+        setError("Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.");
+        setIsLoading(false);
       }
     }
 
     fetchAiScenario();
-
-    return () => { isMounted = false; };
   }, [topic]);
 
   if (error) {
@@ -57,6 +61,6 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
   if (isLoading) {
     return <LoadingScreen topic={topic} />;
   }
-
-  return <FlowCanvas initialNodes={nodes} initialEdges={edges} isDynamicMode={true} />;
+  
+  return <FlowCanvas initialNodes={nodes} initialEdges={edges} isDynamicMode={true} startNodeId="q1" />;
 }

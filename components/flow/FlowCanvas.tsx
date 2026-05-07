@@ -8,8 +8,9 @@ import CircleNode from './nodes/CircleNode';
 import CloudNode from './nodes/CloudNode';
 import DiamondNode from './nodes/DiamondNode';
 import PlaceholderNode from './nodes/PlaceholderNode';
-import RectangleNode from './nodes/RectangleNode';
+import OptionNode from './nodes/OptionNode';
 import InteractiveEdge from './edges/InteractiveEdge';
+import RectangleNode from './nodes/RectangleNode';
 
 import { COLORS } from '@/constants/theme';
 
@@ -21,6 +22,7 @@ const nodeTypes = {
   cloud: CloudNode,
   diamond: DiamondNode,
   placeholder: PlaceholderNode,
+  option: OptionNode,
   rectangle: RectangleNode,
 };
 
@@ -47,7 +49,7 @@ export default function FlowCanvas({ initialNodes, initialEdges, startNodeId, is
 
   useEffect(() => {
     if (initialNodes && initialNodes.length > 0) {
-      const { nodes: preparedNodes, edges: preparedEdges } = initializeFlowState(initialNodes, initialEdges);
+      const { nodes: preparedNodes, edges: preparedEdges } = initializeFlowState(initialNodes, initialEdges, startNodeId);
       const { layoutedNodes, layoutedEdges } = getLayoutedElements(preparedNodes, preparedEdges);
       
       setNodes(layoutedNodes);

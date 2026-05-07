@@ -1,7 +1,7 @@
 import BaseNode from "./BaseNode";
 import { COLORS, TYPOGRAPHY } from "@/constants/theme";
 
-interface RectangleNodeProps {
+interface OptionNodeProps {
   id: string;
   data: {
     label: string;
@@ -12,30 +12,40 @@ interface RectangleNodeProps {
   };
 }
 
-export default function RectangleNode({ id, data }: RectangleNodeProps) {
+export default function OptionNode({ id, data }: OptionNodeProps) {
   const isActive = data.isActive;
   const isDiscovered = data.isDiscovered;
   const isSelectable = data.isSelectable;
   const isTeased = data.isTeased;
+
+  let buttonClasses =
+    "px-4 py-1.5 text-sm font-medium transition-all duration-300 font-vesper ";
 
   const backgroundColor = isActive
     ? COLORS.nodeBackgroundActive
     : isDiscovered
       ? COLORS.nodeBackgroundInactive
       : COLORS.nodeBackgroundUndiscovered;
-  const borderColor =
-    isActive || isSelectable
-      ? COLORS.nodeBackgroundActive
-      : isDiscovered
-        ? COLORS.nodeBorderInactive
-        : COLORS.nodeBorderUndiscovered;
+  const borderColor = isSelectable
+    ? COLORS.nodeBorderSelectableOption
+    : isDiscovered
+      ? COLORS.nodeBorderInactiveOption
+      : COLORS.nodeBorderUndiscovered;
   const color = isActive
     ? COLORS.nodeTextActive
     : isSelectable
-      ? COLORS.nodeBackgroundActive
+      ? COLORS.optionTextNext
       : isDiscovered
-        ? COLORS.nodeTextInactive
+        ? COLORS.optionTextDefault
         : COLORS.nodeTextUndiscovered;
+
+  if (isActive) {
+    buttonClasses += "shadow-lg";
+  } else if (isSelectable) {
+    buttonClasses += "cursor-pointer";
+  } else {
+    buttonClasses += "cursor-default";
+  }
 
   return (
     <BaseNode
@@ -44,19 +54,14 @@ export default function RectangleNode({ id, data }: RectangleNodeProps) {
       isDiscovered={isDiscovered}
       isSelectable={isSelectable}
       isTeased={isTeased}
-      className="w-56 min-h-[4rem] flex items-center justify-center"
+      className="!min-w-0 !min-h-0 !w-max !h-max"
     >
       <div
-        className="absolute inset-0 border-4 transition-all duration-300"
+        className={buttonClasses}
         style={{
           backgroundColor,
           borderColor,
-        }}
-      ></div>
-
-      <div
-        className="relative z-10 text-center text-sm font-medium px-4 py-3 pointer-events-none transition-colors duration-300"
-        style={{
+          borderWidth: "1px",
           color,
           fontFamily: TYPOGRAPHY.nodeFontFamily,
           fontSize: TYPOGRAPHY.nodeFontSize,

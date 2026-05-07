@@ -1,5 +1,5 @@
 import { BaseEdge, EdgeProps, useInternalNode } from '@xyflow/react';
-import { COLORS } from '@/app/constants/theme';
+import { COLORS } from '@/constants/theme';
 
 function getPointOnBoundary(node: any, angle: number) {
   const w = (node.measured?.width || node.width || 0) / 2;

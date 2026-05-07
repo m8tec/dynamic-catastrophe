@@ -1,0 +1,5 @@
+export const metadata = {
+  title: "Der Plastik-Mensch",
+  description: "Mikroplastik im Blut, im Regenwald, im Gehirn. Wir haben unsere Umwelt vergiftet – und jetzt verdauen wir die unausweichlichen Konsequenzen.",
+  teaserImage: "/images/scenarios/microplastics/teaser.jpg",
+};

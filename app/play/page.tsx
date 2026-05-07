@@ -1,5 +1,5 @@
-import FlowCanvas from '@/app/components/FlowCanvas';
-import { getStaticScenario } from '@/app/lib/staticData';
+import FlowCanvas from '@/components/flow/FlowCanvas';
+import { getStaticScenario } from '@/lib/staticData';
 import { Metadata } from 'next';
 
 export async function generateMetadata({

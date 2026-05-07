@@ -1,5 +1,5 @@
 import BaseNode from "./BaseNode";
-import { COLORS, TYPOGRAPHY } from "@/app/constants/theme";
+import { COLORS, TYPOGRAPHY } from "@/constants/theme";
 
 interface CircleNodeProps {
   id: string;

@@ -1,0 +1,5 @@
+export const metadata = {
+  title: "Der leere Planet",
+  description: "Geburtenraten stürzen ab, die Gesellschaft überaltert. Ein langsamer, wirtschaftlicher Erstickungstod einer Welt, der die Jugend ausgeht.",
+  teaserImage: "/images/scenarios/empty-planet/teaser.webp",
+};

@@ -11,7 +11,7 @@ import PlaceholderNode from './nodes/PlaceholderNode';
 import RectangleNode from './nodes/RectangleNode';
 import InteractiveEdge from './edges/InteractiveEdge';
 
-import { COLORS } from '@/app/constants/theme';
+import { COLORS } from '@/constants/theme';
 
 import { initializeFlowState } from '@/utils/flowInit';
 import { getLayoutedElements } from '@/utils/layout';

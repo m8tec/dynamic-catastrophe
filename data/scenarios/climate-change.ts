@@ -2,7 +2,8 @@ import { Node, Edge } from '@xyflow/react';
 
 export const metadata = {
   title: "Klimawandel: Die nackte Wahrheit",
-  description: "Bist du bereit für die Realität? Ein interaktiver Pfad durch die Klimakatastrophe.",
+  description: "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'.",
+  teaserImage: "/images/scenarios/climate-change/teaser.png",
 };
 
 export const nodes: Node[] = [

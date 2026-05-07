@@ -16,12 +16,12 @@ const geistMono = Geist_Mono({
 const vesperLibre = localFont({
   src: [
     {
-      path: './fonts/vesper-libre-all-400.woff2',
+      path: '../fonts/vesper-libre-all-400.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: './fonts/vesper-libre-all-700.woff2',
+      path: '../fonts/vesper-libre-all-700.woff2',
       weight: '700',
       style: 'normal',
     }

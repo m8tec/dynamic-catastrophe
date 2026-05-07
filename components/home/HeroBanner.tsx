@@ -1,0 +1,54 @@
+import fs from "fs";
+import path from "path";
+import BackgroundSlider from "./BackgroundSlider";
+
+async function getBackgroundImages() {
+  const imagesDir = path.join(process.cwd(), "public", "images", "home");
+
+  if (!fs.existsSync(imagesDir)) return [];
+
+  const files = fs.readdirSync(imagesDir);
+  files.sort(() => Math.random() - 0.5);
+
+  const images = files
+    .filter(
+      (f) =>
+        f.endsWith(".png") ||
+        f.endsWith(".webp") ||
+        f.endsWith(".jpg") ||
+        f.endsWith(".jpeg"),
+    )
+    .map((f) => `/images/home/${f}`);
+
+  return images;
+}
+
+export default async function HeroBanner() {
+  const backgroundImages = await getBackgroundImages();
+
+  return (
+    <section className="relative w-full h-[55vh] flex flex-col items-center justify-center overflow-hidden">
+      <BackgroundSlider images={backgroundImages} />
+
+      <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-[#121212] via-transparent to-black/30" />
+
+      <div className="relative z-10 text-center px-6">
+        <h1
+          className="text-5xl md:text-7xl text-white animate-typewriter caret-blink whitespace-nowrap overflow-hidden"
+          style={{ fontFamily: "var(--font-vesper)" }}
+        >
+          Dynamic Catastrophe
+        </h1>
+        <p
+          className="mt-6 text-lg md:text-xl text-neutral-400 font-light max-w-2xl mx-auto animate-fade-in opacity-0"
+          style={{
+            animation: "fadeIn 1s ease forwards 2.5s",
+            fontFamily: "var(--font-vesper)",
+          }}
+        >
+          Stelle dich den unbequemen Realitäten.
+        </p>
+      </div>
+    </section>
+  );
+}

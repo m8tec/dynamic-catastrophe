@@ -33,12 +33,25 @@ export default async function HeroBanner() {
       <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-[#121212] via-transparent to-black/30" />
 
       <div className="relative z-10 text-center px-6">
-        <h1
-          className="text-5xl md:text-7xl text-white animate-typewriter caret-blink whitespace-nowrap overflow-hidden"
-          style={{ fontFamily: "var(--font-vesper)" }}
-        >
-          Dynamic Catastrophe
-        </h1>
+        
+        <div className="inline-grid text-left">
+          
+          <h1
+            className="text-5xl md:text-7xl opacity-0 whitespace-nowrap pointer-events-none pr-2"
+            style={{ fontFamily: "var(--font-vesper)" }}
+          >
+            Dynamic Catastrophe
+          </h1>
+          
+          <h1
+            className="col-start-1 row-start-1 text-5xl md:text-7xl text-white whitespace-nowrap overflow-hidden border-r-4 border-white pr-2 animate-typewriter"
+            style={{ fontFamily: "var(--font-vesper)" }}
+          >
+            Dynamic Catastrophe
+          </h1>
+          
+        </div>
+
         <p
           className="mt-6 text-lg md:text-xl text-neutral-400 font-light max-w-2xl mx-auto animate-fade-in opacity-0"
           style={{

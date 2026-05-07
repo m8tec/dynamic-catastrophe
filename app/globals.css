@@ -31,24 +31,19 @@ body {
 
 @layer utilities {
   @keyframes typing {
-    from { clip-path: inset(0 100% 0 0); }
-    to { clip-path: inset(0 0 0 0); }
+    from { width: 0; }
+    to { width: 100%; }
   }
+  
   @keyframes blink {
     0%, 100% { border-color: white; }
     50% { border-color: transparent; }
   }
   
   .animate-typewriter {
-    display: inline-block;
-    clip-path: inset(0 100% 0 0);
-    animation: typing 2.5s steps(22, end) forwards;
-  }
-  
-  .caret-blink {
-    border-right: 4px solid white;
-    padding-right: 4px;
-    animation: typing 2.5s steps(22, end) forwards, blink 1s step-end infinite;
+    animation: 
+      typing 2.5s steps(19, end) forwards, 
+      blink 1s step-end 2.5s infinite;
   }
 
   @keyframes fadeIn {
@@ -61,5 +56,4 @@ body {
       transform: translateY(0); 
     }
   }
-  
 }

@@ -1,4 +1,5 @@
 import FlowCanvas from '@/components/flow/FlowCanvas';
+import DynamicFlowLoader from '@/components/flow/DynamicFlowLoader';
 import { getStaticScenario } from '@/lib/staticData';
 import { Metadata } from 'next';
 
@@ -7,12 +8,13 @@ export async function generateMetadata({
   searchParams,
 }: {
   params: Promise<any>;
-  searchParams: Promise<{ mode?: string; scenario?: string }>;
+  searchParams: Promise<{ mode?: string; scenario?: string; topic?: string }>;
 }): Promise<Metadata> {
-  const { mode, scenario } = await searchParams;
+  const { mode, scenario, topic } = await searchParams;
   
   if (mode === 'dynamic') {
-    return { title: "KI-Szenario: Dynamic Catastrophe" };
+    const decodedTopic = topic ? decodeURIComponent(topic) : "Das Unbekannte";
+    return { title: `KI-Szenario: ${decodedTopic} | Dynamic Catastrophe` };
   }
 
   const data = getStaticScenario(scenario);
@@ -28,31 +30,38 @@ export async function generateMetadata({
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description
-    }
+    openGraph: { title, description }
   };
 }
 
 export default async function PlayPage({
   searchParams,
 }: {
-  searchParams: Promise<{ mode?: string; scenario?: string }>;
+  searchParams: Promise<{ mode?: string; scenario?: string; topic?: string }>;
 }) {
-  const { mode, scenario } = await searchParams;
+  const { mode, scenario, topic } = await searchParams;
+
+  if (mode === 'dynamic') {
+    const decodedTopic = topic ? decodeURIComponent(topic) : 'Unbekanntes Grauen';
+    return (
+      <main className="w-full h-screen bg-[#121212]">
+        <DynamicFlowLoader topic={decodedTopic} />
+      </main>
+    );
+  }
+  
   const data = getStaticScenario(scenario);
 
   return (
-    <main className="w-full h-screen bg-[#1E1E1E]">
+    <main className="w-full h-screen bg-[#121212]">
       {data ? (
         <FlowCanvas 
-        initialNodes={data.nodes} 
-        initialEdges={data.edges}
-        isDynamicMode={mode === 'dynamic'}
-      />
+          initialNodes={data.nodes} 
+          initialEdges={data.edges}
+          isDynamicMode={false}
+        />
       ) : (
-        <div className="w-full h-screen flex items-center justify-center" style={{ backgroundColor: '#1E1E1E', color: '#FFFFFF' }}>
+        <div className="w-full h-screen flex items-center justify-center bg-[#121212] text-white">
           <div className="text-xl font-vesper">Szenario nicht gefunden.</div>
         </div>
       )}

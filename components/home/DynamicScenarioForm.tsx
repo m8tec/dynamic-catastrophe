@@ -7,7 +7,7 @@ export default function DynamicScenarioForm() {
             className="text-3xl md:text-4xl text-white mb-4"
             style={{ fontFamily: "var(--font-vesper)" }}
           >
-            Das Unbekannte
+            Deine persöhnliche Katastrophe
           </h2>
           <p className="text-neutral-400 leading-relaxed mb-8">
             Lass die KI ein völlig neues, psychologisches Netz aus Ursache und

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useTheme } from "@/contexts/ThemeContext";
 import { TYPOGRAPHY } from "@/constants/theme";
 
@@ -56,6 +57,27 @@ export default function ScenarioSidebar({ data, isDynamic }: ScenarioSidebarProp
         </button>
 
         <div className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col relative custom-scrollbar">
+          <Link
+            href="/"
+            className="absolute top-5 left-5 z-20 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest opacity-80 hover:opacity-100 transition-all duration-300 group bg-black/40 hover:bg-black/60 px-3 py-1.5 rounded-full backdrop-blur-md border"
+            style={{ 
+              color: theme.nodeTextInactive,
+              borderColor: theme.nodeBorderInactive 
+            }}
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              strokeWidth={2} 
+              stroke="currentColor" 
+              className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+            Flucht
+          </Link>
+
           {data.teaserImage ? (
             <div className="relative w-full h-48 shrink-0">
               <div 
@@ -71,7 +93,7 @@ export default function ScenarioSidebar({ data, isDynamic }: ScenarioSidebarProp
             <div className="h-12 shrink-0" />
           )}
 
-          <div className="px-6 pb-6 flex flex-col gap-6 -mt-2 relative z-10">
+          <div className="px-6 pb-6 flex flex-col gap-6 -mt-12 relative z-10">
             
             <div>
               <h2

@@ -11,14 +11,19 @@ import {
   Edge,
   NodeChange,
   EdgeChange,
+  ReactFlowInstance,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
+import BorderNode from "@/components/flow/nodes/BorderNode";
 import CircleNode from "@/components/flow/nodes/CircleNode";
 import CloudNode from "@/components/flow/nodes/CloudNode";
+import CurvedNode from "@/components/flow/nodes/CurvedNode";
 import DiamondNode from "@/components/flow/nodes/DiamondNode";
-import PlaceholderNode from "@/components/flow/nodes/PlaceholderNode";
 import OptionNode from "@/components/flow/nodes/OptionNode";
+import OptionsNode from "@/components/flow/nodes/OptionsNode";
+import PlaceholderNode from "@/components/flow/nodes/PlaceholderNode";
+import QuoteNode from "@/components/flow/nodes/QuoteNode";
 import RectangleNode from "@/components/flow/nodes/RectangleNode";
 
 import InteractiveEdge from "./edges/InteractiveEdge";
@@ -32,12 +37,16 @@ import { initializeFlowState } from "@/utils/flowInit";
 import { getLayoutedElements } from "@/utils/layout";
 
 const nodeTypes = {
+  border: BorderNode,
   circle: CircleNode,
   cloud: CloudNode,
+  curved: CurvedNode,
   diamond: DiamondNode,
   placeholder: PlaceholderNode,
   option: OptionNode,
+  options: OptionsNode,
   rectangle: RectangleNode,
+  quote: QuoteNode,
 };
 
 const edgeTypes = {
@@ -65,6 +74,9 @@ export default function FlowCanvas({
   const [edges, setEdges] = useState<Edge[]>([]);
 
   const [isMounted, setIsMounted] = useState(false);
+
+  const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null);
+  const [hasCentered, setHasCentered] = useState(false); // <-- NEU
 
   const currentTheme = theme ? THEMES[theme] || THEMES.default : THEMES.default;
 
@@ -97,6 +109,26 @@ export default function FlowCanvas({
     [],
   );
 
+  useEffect(() => {
+    if (rfInstance && nodes.length > 0 && !hasCentered) {
+      const targetNodeId = startNodeId || nodes[0]?.id;
+      const targetNode = nodes.find((n) => n.id === targetNodeId);
+
+      const sidebarOffset = sidebarData ? 160 : 0;
+
+      if (targetNode && targetNode.position) {
+        setTimeout(() => {
+          rfInstance.setCenter(
+            targetNode.position.x + 112 - sidebarOffset,
+            targetNode.position.y + 32,
+            { zoom: 0.7, duration: 1200 }
+          );
+          setHasCentered(true);
+        }, 100);
+      }
+    }
+  }, [rfInstance, nodes, startNodeId, hasCentered]);
+
   if (!isMounted) {
     return (
       <div
@@ -121,10 +153,9 @@ export default function FlowCanvas({
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
+          onInit={setRfInstance}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
-          fitView
-          fitViewOptions={{ padding: 0.5 }}
           nodesDraggable={false}
           nodesConnectable={false}
         >

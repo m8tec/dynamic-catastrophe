@@ -76,7 +76,7 @@ export default function FlowCanvas({
   const [isMounted, setIsMounted] = useState(false);
 
   const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null);
-  const [hasCentered, setHasCentered] = useState(false); // <-- NEU
+  const [hasCentered, setHasCentered] = useState(false);
 
   const currentTheme = theme ? THEMES[theme] || THEMES.default : THEMES.default;
 
@@ -96,7 +96,7 @@ export default function FlowCanvas({
       setNodes(layoutedNodes);
       setEdges(layoutedEdges);
     }
-  }, [initialNodes, initialEdges]);
+  }, [initialNodes, initialEdges, startNodeId]);
 
   const onNodesChange = useCallback(
     (changes: NodeChange[]) =>
@@ -109,25 +109,63 @@ export default function FlowCanvas({
     [],
   );
 
-  useEffect(() => {
-    if (rfInstance && nodes.length > 0 && !hasCentered) {
-      const targetNodeId = startNodeId || nodes[0]?.id;
-      const targetNode = nodes.find((n) => n.id === targetNodeId);
+  const handleRevealAll = useCallback(() => {
+    setNodes((nds) =>
+      nds.map((n) => ({
+        ...n,
+        hidden: false,
+        data: { ...n.data, isDiscovered: true },
+      }))
+    );
+    setEdges((eds) =>
+      eds.map((e) => ({
+        ...e,
+        hidden: false,
+        data: { ...(e.data || {}), isDiscovered: true },
+      }))
+    );
+  }, []);
 
-      const sidebarOffset = sidebarData ? 160 : 0;
+  const handleCenterStart = useCallback(() => {
+    if (!rfInstance || nodes.length === 0) return;
+    
+    const targetNodeId = startNodeId || nodes[0]?.id;
+    const targetNode = nodes.find((n) => n.id === targetNodeId);
+    const sidebarOffset = sidebarData ? 160 : 0;
 
-      if (targetNode && targetNode.position) {
-        setTimeout(() => {
-          rfInstance.setCenter(
-            targetNode.position.x + 112 - sidebarOffset,
-            targetNode.position.y + 32,
-            { zoom: 0.7, duration: 1200 }
-          );
-          setHasCentered(true);
-        }, 100);
-      }
+    if (targetNode && targetNode.position) {
+      setTimeout(() => {
+        rfInstance.setCenter(
+          targetNode.position.x + 112 - sidebarOffset,
+          targetNode.position.y + 32,
+          { zoom: 0.7, duration: 1000 }
+        );
+      }, 50); 
     }
-  }, [rfInstance, nodes, startNodeId, hasCentered]);
+  }, [rfInstance, nodes, startNodeId, sidebarData]);
+
+  const handleReset = useCallback(() => {
+    if (!initialNodes || initialNodes.length === 0) return;
+
+    const { nodes: preparedNodes, edges: preparedEdges } =
+      initializeFlowState(initialNodes, initialEdges, startNodeId);
+    const { layoutedNodes, layoutedEdges } = getLayoutedElements(
+      preparedNodes,
+      preparedEdges,
+    );
+
+    setNodes(layoutedNodes);
+    setEdges(layoutedEdges);
+
+    handleCenterStart();
+  }, [initialNodes, initialEdges, startNodeId, handleCenterStart]);
+
+  useEffect(() => {
+    if (hasCentered || !rfInstance || nodes.length === 0) return;
+
+    handleCenterStart();
+    setHasCentered(true);
+  }, [rfInstance, nodes, hasCentered, handleCenterStart]);
 
   if (!isMounted) {
     return (
@@ -145,7 +183,13 @@ export default function FlowCanvas({
         style={{ backgroundColor: currentTheme.background }}
       >
         {sidebarData && (
-          <ScenarioSidebar data={sidebarData} isDynamic={isDynamicMode} />
+          <ScenarioSidebar 
+            data={sidebarData} 
+            isDynamic={isDynamicMode}
+            onCenterStart={handleCenterStart}
+            onRevealAll={handleRevealAll}
+            onReset={handleReset}
+          />
         )}
 
         <ReactFlow

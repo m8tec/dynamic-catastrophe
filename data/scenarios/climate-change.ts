@@ -49,7 +49,7 @@ export const nodes: StaticNode[] = [
   { id: '36', type: 'option', data: { label: 'Wir befinden uns in einem Ausnahmezustand und sollten anfangen entsprechend zu handeln' } },
   { id: '37', type: 'option', data: { label: 'Noch nicht, aber…' } },
   { id: '38', type: 'option', data: { label: 'Was meinst du mit »noch«?' } },
-  { id: '39', type: 'border', data: { label: 'Die Apokalypse findet schon statt (für mich)!' } },
+  { id: '39', type: 'curved', data: { label: 'Die Apokalypse findet schon statt (für mich)!' } },
   { id: '40', type: 'option', data: { label: 'Ich muss dauernd daran denken' } },
   { id: '41', type: 'option', data: { label: 'Kommt darauf an…' } },
   { id: '42', type: 'diamond', data: { label: 'Was für eine Art Problem ist es?' } },
@@ -114,7 +114,6 @@ export const nodes: StaticNode[] = [
   { id: '96', type: 'option', data: { label: 'Nö!' } },
   { id: '97', type: 'quote', data: { label: 'Das verändert alles. — Naomi Klein' } },
   { id: '98', type: 'option', data: { label: 'Alles?!' } },
-  { id: '99', type: 'option', data: { label: 'Nö!' } },
   { id: '100', type: 'quote', data: { label: 'Während alles auseinanderfällt, kommt alles zusammen. — Jamie Henn' } },
   { id: '101', type: 'option', data: { label: 'Also...' } },
   { id: '102', type: 'diamond', data: { label: 'Steht uns Kollaps oder Transformation bevor?' } },
@@ -130,7 +129,6 @@ export const nodes: StaticNode[] = [
   { id: '111', type: 'option', data: { label: 'Nur der Welt wie wir sie kennen' } },
   { id: '112', type: 'quote', data: { label: 'Wir müssen lernen als Zivilisation zu sterben. — Roy Scranton' } },
   { id: '113', type: 'option', data: { label: 'Also, was nun?!' } },
-  { id: '114', type: 'option', data: { label: 'Moment!' } },
   { id: '115', type: 'option', data: { label: 'Oh!' } },
 
   { id: '116', type: 'option', data: { label: 'Können wir den Kurs noch ändern?' } },
@@ -954,4 +952,7 @@ export const edges: StaticEdge[] = [
   { source: '271', target: '273' },
 
   { source: '313', target: '304' },
+
+  { source: '214', target: '215' },
+  { source: '215', target: '216' },
 ];

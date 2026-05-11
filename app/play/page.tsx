@@ -2,6 +2,7 @@ import FlowCanvas from '@/components/flow/FlowCanvas';
 import DynamicFlowLoader from '@/components/flow/DynamicFlowLoader';
 import { getStaticScenario } from '@/lib/staticData';
 import { Metadata } from 'next';
+import { redirect } from 'next/navigation';
 
 export async function generateMetadata({
   params,
@@ -40,6 +41,10 @@ export default async function PlayPage({
   searchParams: Promise<{ mode?: string; scenario?: string; topic?: string }>;
 }) {
   const { mode, scenario, topic } = await searchParams;
+
+  if (!scenario && !topic) {
+    redirect('/');
+  }
 
   if (mode === 'dynamic') {
     const decodedTopic = topic ? decodeURIComponent(topic) : 'Unbekanntes Grauen';

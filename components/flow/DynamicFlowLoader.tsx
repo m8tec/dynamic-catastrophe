@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Node, Edge } from "@xyflow/react";
 import FlowCanvas from "./FlowCanvas";
 import LoadingScreen from "./LoadingScreen";
-import { parseAiToFlow } from "@/utils/aiGraphParser";
+import { parseScenarioToFlow } from "@/utils/scenarioParser";
 import { ThemeName } from "@/constants/theme";
 
 export default function DynamicFlowLoader({ topic }: { topic: string }) {
@@ -44,7 +44,7 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
         console.log("Frontend empfängt:", data);
 
         if (data.scenario) {
-          const { nodes: flowNodes, edges: flowEdges } = parseAiToFlow(
+          const { nodes: flowNodes, edges: flowEdges } = parseScenarioToFlow(
             data.scenario,
           );
 

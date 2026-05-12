@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import FlowCanvas from "@/components/flow/FlowCanvas";
-import { parseAiToFlow } from "@/utils/aiGraphParser";
+import { parseScenarioToFlow } from "@/utils/scenarioParser";
 import { ThemeName } from "@/constants/theme";
 
 interface CustomScenarioData {
@@ -31,7 +31,7 @@ export default function CustomPlayPage() {
     );
   }
   
-  const { nodes, edges } = parseAiToFlow(data.scenario);
+  const { nodes, edges } = parseScenarioToFlow(data.scenario);
 
   return (
     <FlowCanvas 

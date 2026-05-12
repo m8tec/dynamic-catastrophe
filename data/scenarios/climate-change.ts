@@ -2158,7 +2158,7 @@ export const data: ScenarioData = {
 };
 
 // legacy
-export const nodes: StaticNode[] = [
+export const nodess: StaticNode[] = [
   { id: "1", type: "diamond", data: { label: "Ist der Klimawandel real?" } },
   { id: "2", type: "option", data: { label: "Nö!" } },
   {
@@ -3258,7 +3258,7 @@ export const nodes: StaticNode[] = [
 ];
 
 // legacy
-export const edges: StaticEdge[] = [
+export const edgess: StaticEdge[] = [
   { source: "1", target: "6" },
   { source: "6", target: "1" },
 

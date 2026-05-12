@@ -6,7 +6,7 @@ export function getStaticScenario(scenarioId?: string) {
     return {
       nodes: normalizeStaticNodes((climateData as any).nodes || []),
       edges: normalizeStaticEdges((climateData as any).edges || []),
-      metadata: climateData.metadata,
+      metadata: climateData.data,
     };
   }
   

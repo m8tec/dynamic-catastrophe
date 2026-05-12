@@ -1,13 +1,2163 @@
-import { ScenarioMetadata } from '@/types/scenario';
+import { ScenarioData } from '@/types/scenario';
 import { StaticNode, StaticEdge } from '@/types/static'
 
-export const metadata : ScenarioMetadata = {
+export const data : ScenarioData = {
   title: "Klimawandel: Die nackte Wahrheit",
   description: "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'.",
   teaserImage: "/images/scenarios/climate-change/teaser.png",
-  theme: "default"
+  theme: "default",
+  scenario: 
+  [
+  {
+    "id": "1",
+    "type": "diamond",
+    "text": "Ist der Klimawandel real?",
+    "options": [
+      {
+        "text": "Klima was?",
+        "nextId": "1"
+      },
+      {
+        "text": "Ich versuche, nicht daran zu denken",
+        "nextId": "1"
+      },
+      {
+        "text": "Nö!",
+        "nextId": "4"
+      },
+      {
+        "text": "Ja",
+        "nextId": "13"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "type": "circle",
+    "text": "Verdrängst du da vielleicht etwas?",
+    "options": [
+      {
+        "text": "Hmmm...",
+        "nextId": "1"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "7"
+      }
+    ]
+  },
+  {
+    "id": "7",
+    "type": "cloud",
+    "text": "Ich verdränge gar nix!",
+    "options": [
+      {
+        "text": "Alles Lügen aus China",
+        "nextId": "9"
+      }
+    ]
+  },
+  {
+    "id": "13",
+    "type": "diamond",
+    "text": "Sind wir am Arsch?",
+    "options": [
+      {
+        "text": "Ich versuche, nicht daran zu denken",
+        "nextId": "13"
+      },
+      {
+        "text": "Wen meinst du mit »wir«?",
+        "nextId": "16"
+      },
+      {
+        "text": "Noch nicht, aber…",
+        "nextId": "38"
+      }
+    ]
+  },
+  {
+    "id": "16",
+    "type": "curved",
+    "text": "Meine Freund*innen und ich fliehen in ein skandinavisches Landhaus.",
+    "options": [
+      {
+        "text": "Denn…",
+        "nextId": "18"
+      }
+    ]
+  },
+  {
+    "id": "19",
+    "type": "circle",
+    "text": "Könnte es sein, dass du Gefühle verdrängst?",
+    "options": [
+      {
+        "text": "...oder ein wenig rassistisch bist?",
+        "nextId": "21"
+      }
+    ]
+  },
+  {
+    "id": "24",
+    "type": "cloud",
+    "text": "Nutze deine Privilegien.",
+    "options": [
+      {
+        "text": "…ohne dich zu sehr als Besserwisser zu inszenieren",
+        "nextId": "24"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "26"
+      }
+    ]
+  },
+  {
+    "id": "26",
+    "type": "diamond",
+    "text": "Es betrifft uns also alle gleichermaßen?",
+    "options": [
+      {
+        "text": "Sozusagen…",
+        "nextId": "32"
+      },
+      {
+        "text": "Es ist kompliziert…",
+        "nextId": "20"
+      }
+    ]
+  },
+  {
+    "id": "28",
+    "type": "border",
+    "text": "Menschen, die die Auswirkungen des Klimawandels als erste und am schlimmsten erleben, werden auf Englisch »Frontline Communities« genannt. Sie sind überwiegend Niedrigverdienende, People of Color, Indigene, aus dem globalen Süden, oder sie arbeiten unter gesundheitsschädlichen Bedingungen.",
+    "options": [
+      {
+        "text": "Ohne uns keine Beschlüsse über uns",
+        "nextId": "26"
+      },
+      {
+        "text": "NEIN!",
+        "nextId": "26"
+      }
+    ]
+  },
+  {
+    "id": "34",
+    "type": "diamond",
+    "text": "Können wir das wieder reparieren?",
+    "options": [
+      {
+        "text": "Ich versuche, nicht daran zu denken",
+        "nextId": "34"
+      },
+      {
+        "text": "Kommt darauf an…",
+        "nextId": "56"
+      },
+      {
+        "text": "Kommt darauf an…",
+        "nextId": "42"
+      }
+    ]
+  },
+  {
+    "id": "39",
+    "type": "curved",
+    "text": "Die Apokalypse findet schon statt (für mich)!",
+    "options": [
+      {
+        "text": "Ich muss dauernd daran denken",
+        "nextId": "39"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "28"
+      }
+    ]
+  },
+  {
+    "id": "42",
+    "type": "diamond",
+    "text": "Was für eine Art Problem ist es?",
+    "options": [
+      {
+        "text": "Ein gewöhnliches Problem",
+        "nextId": "54"
+      },
+      {
+        "text": "Ein »Komplexes Problem«",
+        "nextId": "44"
+      }
+    ]
+  },
+  {
+    "id": "45",
+    "type": "border",
+    "text": "Ein Komplexes Problem (engl. »wicked problem«) kannst du nicht definieren, geht nie vorbei, hat keine korrekte Antwort (z.B. gibt es keine optimale Lösung, auf die man sich einigen kann), ist einzigartig (z.B. so besonders, dass kein früheres Problem als Modell dienen kann) und ist selbst das Symptom von anderen (komplexen) Problemen.",
+    "options": [
+      {
+        "text": "Oh, aber der Klimawandel ist sogar noch schlimmer",
+        "nextId": "47"
+      }
+    ]
+  },
+  {
+    "id": "52",
+    "type": "rectangle",
+    "text": "Dilemma, nicht Problem",
+    "options": [
+      {
+        "text": "Und ein Dilemma kann man nicht »reparieren«",
+        "nextId": "135"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "95"
+      }
+    ]
+  },
+  {
+    "id": "54",
+    "type": "quote",
+    "text": "Es ist ein technisches Problem, für das es technische Lösungen gibt. — Rex Tillerson",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "52"
+      }
+    ]
+  },
+  {
+    "id": "56",
+    "type": "diamond",
+    "text": "In welcher Art Krise stecken wir?",
+    "options": [
+      {
+        "text": "Ich versuche, nicht daran zu denken",
+        "nextId": "56"
+      },
+      {
+        "text": "Nahrung",
+        "nextId": "59"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "73"
+      },
+      {
+        "text": "Nur eine Sache",
+        "nextId": "75"
+      }
+    ]
+  },
+  {
+    "id": "73",
+    "type": "cloud",
+    "text": "Unsere ökologische Krise ist das Ergebnis vieler Krisen.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "78"
+      }
+    ]
+  },
+  {
+    "id": "78",
+    "type": "diamond",
+    "text": "Wie schlimm ist es?",
+    "options": [
+      {
+        "text": "Ich versuche, nicht daran zu denken",
+        "nextId": "78"
+      },
+      {
+        "text": "Bisschen schlimm",
+        "nextId": "81"
+      },
+      {
+        "text": "Richtig richtig schlimm",
+        "nextId": "87"
+      },
+      {
+        "text": "Richtig schlimm",
+        "nextId": "87"
+      },
+      {
+        "text": "Ziemlich schlimm",
+        "nextId": "83"
+      }
+    ]
+  },
+  {
+    "id": "81",
+    "type": "rectangle",
+    "text": "Business as usual.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "54"
+      }
+    ]
+  },
+  {
+    "id": "83",
+    "type": "rectangle",
+    "text": "Der Übergang wird schwer.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "100"
+      }
+    ]
+  },
+  {
+    "id": "85",
+    "type": "rectangle",
+    "text": "Zusammenbruch der Zivilisation",
+    "options": [
+      {
+        "text": "Also, was nun?!",
+        "nextId": "112"
+      },
+      {
+        "text": "Moment!",
+        "nextId": "110"
+      }
+    ]
+  },
+  {
+    "id": "87",
+    "type": "diamond",
+    "text": "Soll ich anderen sagen wie schlimm?",
+    "options": [
+      {
+        "text": "Nein",
+        "nextId": "78"
+      },
+      {
+        "text": "Ja",
+        "nextId": "90"
+      }
+    ]
+  },
+  {
+    "id": "90",
+    "type": "rectangle",
+    "text": "Das Aussterben der Menschheit",
+    "options": [
+      {
+        "text": "Neeeiiinnn!",
+        "nextId": "92"
+      },
+      {
+        "text": "Moment!",
+        "nextId": "110"
+      }
+    ]
+  },
+  {
+    "id": "92",
+    "type": "diamond",
+    "text": "Können wir gar nichts machen?",
+    "options": [
+      {
+        "text": "Nein :-(",
+        "nextId": "94"
+      },
+      {
+        "text": "Keine Angst…",
+        "nextId": "148"
+      },
+      {
+        "text": "Wahrscheinlich nicht, aber…",
+        "nextId": "181"
+      },
+      {
+        "text": "Vielleicht",
+        "nextId": "178"
+      }
+    ]
+  },
+  {
+    "id": "94",
+    "type": "rectangle",
+    "text": "Endspiel",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "276"
+      }
+    ]
+  },
+  {
+    "id": "95",
+    "type": "cloud",
+    "text": "Also… können wir es richten, ohne dass ICH mich ändern muss?",
+    "options": [
+      {
+        "text": "Nö!",
+        "nextId": "97"
+      }
+    ]
+  },
+  {
+    "id": "97",
+    "type": "quote",
+    "text": "Das verändert alles. — Naomi Klein",
+    "options": [
+      {
+        "text": "Alles?!",
+        "nextId": "100"
+      }
+    ]
+  },
+  {
+    "id": "100",
+    "type": "quote",
+    "text": "Während alles auseinanderfällt, kommt alles zusammen. — Jamie Henn",
+    "options": [
+      {
+        "text": "Also...",
+        "nextId": "102"
+      }
+    ]
+  },
+  {
+    "id": "102",
+    "type": "diamond",
+    "text": "Steht uns Kollaps oder Transformation bevor?",
+    "options": [
+      {
+        "text": "Wen juckt's?",
+        "nextId": "104"
+      },
+      {
+        "text": "Beides nicht zu knapp",
+        "nextId": "116"
+      }
+    ]
+  },
+  {
+    "id": "104",
+    "type": "cloud",
+    "text": "Party feiern als ob es 2099 wäre.",
+    "options": []
+  },
+  {
+    "id": "110",
+    "type": "diamond",
+    "text": "Ist das wirklich das Ende der Welt?",
+    "options": [
+      {
+        "text": "Nö, nur noch ein Hollywood-Blockbuster",
+        "nextId": "109"
+      },
+      {
+        "text": "Ja, wirklich",
+        "nextId": "90"
+      },
+      {
+        "text": "Nur der Welt wie wir sie kennen",
+        "nextId": "112"
+      },
+      {
+        "text": "Fühlt sich ganz so an",
+        "nextId": "182"
+      }
+    ]
+  },
+  {
+    "id": "112",
+    "type": "quote",
+    "text": "Wir müssen lernen als Zivilisation zu sterben. — Roy Scranton",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "100"
+      },
+      {
+        "text": "Oh!",
+        "nextId": "102"
+      }
+    ]
+  },
+  {
+    "id": "120",
+    "type": "diamond",
+    "text": "Müssen wir?",
+    "options": [
+      {
+        "text": "Nö.",
+        "nextId": "104"
+      },
+      {
+        "text": "Ja!",
+        "nextId": "123"
+      },
+      {
+        "text": "Kommt darauf an",
+        "nextId": "157"
+      }
+    ]
+  },
+  {
+    "id": "124",
+    "type": "quote",
+    "text": "…die einzige Frage, die wir stellen dürfen: was braucht diese Erde von uns, wenn wir weiterhin auf ihr leben wollen? — Wendell Berry",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "127",
+    "type": "diamond",
+    "text": "Schaffen wir es?",
+    "options": [
+      {
+        "text": "Frag nicht!",
+        "nextId": "124"
+      },
+      {
+        "text": "Vielleicht",
+        "nextId": "132"
+      },
+      {
+        "text": "Nein, leider…",
+        "nextId": "130"
+      },
+      {
+        "text": "Kommt darauf an",
+        "nextId": "184"
+      }
+    ]
+  },
+  {
+    "id": "132",
+    "type": "quote",
+    "text": "Wenn es eine Bewegung gibt, haben wir eine Chance. Also lasst uns loslegen. — Bill McKibben",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "135",
+    "type": "diamond",
+    "text": "Gibt es Gründe optimistisch zu sein?",
+    "options": [
+      {
+        "text": "Es könnte noch schlimmer sein",
+        "nextId": "135"
+      },
+      {
+        "text": "Nicht wirklich...",
+        "nextId": "140"
+      },
+      {
+        "text": "Ja & Nein",
+        "nextId": "138"
+      }
+    ]
+  },
+  {
+    "id": "138",
+    "type": "quote",
+    "text": "Pessimismus des Verstandes, Optimismus des Willens. — Antonio Gramsc",
+    "options": [
+      {
+        "text": "Okay, also...",
+        "nextId": "102"
+      }
+    ]
+  },
+  {
+    "id": "140",
+    "type": "quote",
+    "text": "Ich kann kein Optimist sein, aber ich bin ein Gefangener der Hoffnung. — Desmond Tutu",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "141"
+      }
+    ]
+  },
+  {
+    "id": "141",
+    "type": "diamond",
+    "text": "Besteht noch Hoffnung?",
+    "options": [
+      {
+        "text": "Siehe anderes",
+        "nextId": "143"
+      },
+      {
+        "text": "Hoffnung, dein Ernst? Deine Bude brennt!",
+        "nextId": "146"
+      }
+    ]
+  },
+  {
+    "id": "155",
+    "type": "quote",
+    "text": "Wir müssen das Richtige tun, weil es richtig ist. — Kathleen Dean Moore",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "120"
+      }
+    ]
+  },
+  {
+    "id": "157",
+    "type": "diamond",
+    "text": "Was für ein Vorfahre willst du sein?",
+    "options": [
+      {
+        "text": "Ein Arschloch",
+        "nextId": "157"
+      },
+      {
+        "text": "Mögen die Augen der Zukunft sich in dein Herz bohren",
+        "nextId": "157"
+      },
+      {
+        "text": "Kein Arschloch",
+        "nextId": "188"
+      }
+    ]
+  },
+  {
+    "id": "163",
+    "type": "cloud",
+    "text": "Ich darf die Hoffnung nicht aufgeben, wenn andere sich das gar nicht leisten können.",
+    "options": [
+      {
+        "text": "Oder doch?",
+        "nextId": "163"
+      },
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "166",
+    "type": "cloud",
+    "text": "Ich wähle die Hoffnung.",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "168",
+    "type": "cloud",
+    "text": "Ich rebelliere gegen mein Aussterben!",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "170",
+    "type": "diamond",
+    "text": "Sollen wir in dieser Weit überhaupt noch Kinder zeugen?",
+    "options": [
+      {
+        "text": "Ja!",
+        "nextId": "173"
+      },
+      {
+        "text": "Ups! Habe ich schon",
+        "nextId": "173"
+      },
+      {
+        "text": "Nein",
+        "nextId": "190"
+      }
+    ]
+  },
+  {
+    "id": "176",
+    "type": "cloud",
+    "text": "Du kannst noch helfen, dass es langsamer und weniger schlimmer wird.",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "178",
+    "type": "quote",
+    "text": "Zu handeln ist meine Bewältigungs- und Hoffnungs-Strategie. — Chuck Collins",
+    "options": []
+  },
+  {
+    "id": "181",
+    "type": "cloud",
+    "text": "Die Weltgeschichte steckt voller Überraschungen. Gewissheit gibt es nicht.",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "182",
+    "type": "diamond",
+    "text": "Warum also was tun?",
+    "options": [
+      {
+        "text": "Um Zeit zu gewinnen",
+        "nextId": "176"
+      },
+      {
+        "text": "Ich habe Kinder!",
+        "nextId": "170"
+      },
+      {
+        "text": "Moralischer Anstand",
+        "nextId": "155"
+      },
+      {
+        "text": "Vermächtnis",
+        "nextId": "157"
+      },
+      {
+        "text": "Solidarität",
+        "nextId": "163"
+      },
+      {
+        "text": "Hoffnung?",
+        "nextId": "166"
+      },
+      {
+        "text": "Überleben",
+        "nextId": "168"
+      }
+    ]
+  },
+  {
+    "id": "184",
+    "type": "diamond",
+    "text": "Was liebst du zu innig, um es zu verlieren?",
+    "options": [
+      {
+        "text": "Und...",
+        "nextId": "186"
+      }
+    ]
+  },
+  {
+    "id": "186",
+    "type": "diamond",
+    "text": "Was wirst du deswegen tun?",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      },
+      {
+        "text": "Einen Scheiß werde ich tun",
+        "nextId": "195"
+      }
+    ]
+  },
+  {
+    "id": "190",
+    "type": "cloud",
+    "text": "Der Erde geht es ohne uns besser.",
+    "options": [
+      {
+        "text": "Nun ja, okay, also…",
+        "nextId": "94"
+      },
+      {
+        "text": "Das lässt sich auch anders erzählen",
+        "nextId": "240"
+      }
+    ]
+  },
+  {
+    "id": "193",
+    "type": "cloud",
+    "text": "Der Erde wird es gut gehen, egal, was wir machen.",
+    "options": [
+      {
+        "text": "In zehn Millionen Jahren vielleicht",
+        "nextId": "193"
+      },
+      {
+        "text": "Zur Hölle, nein, wird es ihr nicht!",
+        "nextId": "197"
+      },
+      {
+        "text": "Tatsächlich...",
+        "nextId": "190"
+      }
+    ]
+  },
+  {
+    "id": "197",
+    "type": "cloud",
+    "text": "Wir haben ein Unheil angerichtet, das nur wir aufräumen können.",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "205",
+    "type": "diamond",
+    "text": "Ist es schon JETZT?",
+    "options": [
+      {
+        "text": "Noch nicht!",
+        "nextId": "205"
+      },
+      {
+        "text": "Jetzt!",
+        "nextId": "250"
+      }
+    ]
+  },
+  {
+    "id": "209",
+    "type": "cloud",
+    "text": "Die Wissenschaft findet eine Lösung.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "214"
+      },
+      {
+        "text": "Direct Air Capture",
+        "nextId": "211"
+      }
+    ]
+  },
+  {
+    "id": "214",
+    "type": "quote",
+    "text": "Wir gleichen Göttern, die noch enorm viel lernen müssen. — Stewart Brand",
+    "options": [
+      {
+        "text": "Also wirklich noch sehr, sehr viel",
+        "nextId": "216"
+      }
+    ]
+  },
+  {
+    "id": "216",
+    "type": "quote",
+    "text": "Kolonisieren wir nicht andere Planeten, sind wir im Arsch. — Elon Musk (sinngemäß)",
+    "options": []
+  },
+  {
+    "id": "219",
+    "type": "border",
+    "text": "Degrowth (Wachstumsumkehr) bezeichnet ein gerechtes Zurückfahren von Produktion und Konsum, welches das Wohl von Menschen fördert und ökologische Zustände verbessert.",
+    "options": [
+      {
+        "text": "Oh, okay",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "222",
+    "type": "quote",
+    "text": "Wenn wir auf die Regierungen warten, wird es zu spät sein; handeln wir als Einzelne, ist das zu wenig; aber handeln wir als Gemeinschaften, könnte es vielleicht reichen. — Rob Hopkins",
+    "options": [
+      {
+        "text": "Künstler;Ingenieurin;Erzähler;Heilerin;Trickster;Philosophin;Kriegerin;Guter Nachbar",
+        "nextId": "267"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "224",
+    "type": "quote",
+    "text": "Beschützt die Heiligkeit von Mutter Erde. — Clayton Thomas Mueller",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "225"
+      }
+    ]
+  },
+  {
+    "id": "225",
+    "type": "cloud",
+    "text": "Ich werde dieses Fleckchen Land verteidigen.",
+    "options": [
+      {
+        "text": "Das bedeutet Krieg",
+        "nextId": "229"
+      }
+    ]
+  },
+  {
+    "id": "227",
+    "type": "cloud",
+    "text": "Mein öko-sozialistischer Futurismus macht deinen kapitalistischen Realismus platt!",
+    "options": [
+      {
+        "text": "Das bedeutet Krieg",
+        "nextId": "229"
+      }
+    ]
+  },
+  {
+    "id": "233",
+    "type": "cloud",
+    "text": "Warum zum Teufel recycle ich denn dann?",
+    "options": [
+      {
+        "text": "Wegen des Trostes der Gründlichkeit?",
+        "nextId": "235"
+      }
+    ]
+  },
+  {
+    "id": "238",
+    "type": "cloud",
+    "text": "Suche Dir eine Metapher aus, mit der Du leben kannst.",
+    "options": [
+      {
+        "text": "Klima- ~Wandel-Chaos-Apokalypse~ Notstand",
+        "nextId": "240"
+      },
+      {
+        "text": "Künstler;Ingenieurin;Erzähler;Heilerin;Trickster;Philosophin;Kriegerin;Guter Nachbar",
+        "nextId": "267"
+      }
+    ]
+  },
+  {
+    "id": "244",
+    "type": "quote",
+    "text": "Wir haben alles Nötige, bis auf den politischen Willen. — Al Gore",
+    "options": [
+      {
+        "text": "Emissionshandel",
+        "nextId": "246"
+      }
+    ]
+  },
+  {
+    "id": "250",
+    "type": "diamond",
+    "text": "Was brauchen wir?",
+    "options": [
+      {
+        "text": "Nicht so oft duschen",
+        "nextId": "231"
+      },
+      {
+        "text": "Bessere Narrative",
+        "nextId": "238"
+      },
+      {
+        "text": "Alles und Alle",
+        "nextId": "266"
+      },
+      {
+        "text": "Stärkere Gesetze",
+        "nextId": "244"
+      },
+      {
+        "text": "Durchdachte Technologie",
+        "nextId": "209"
+      },
+      {
+        "text": "Soziale Revolution",
+        "nextId": "227"
+      },
+      {
+        "text": "Widerstand aus der Zivilgesellschaft",
+        "nextId": "224"
+      },
+      {
+        "text": "Energie drosseln",
+        "nextId": "218"
+      },
+      {
+        "text": "Resiliente Gemeinschaften",
+        "nextId": "222"
+      }
+    ]
+  },
+  {
+    "id": "251",
+    "type": "diamond",
+    "text": "Sind das echte Lösungen?",
+    "options": [
+      {
+        "text": "Nö!",
+        "nextId": "253"
+      },
+      {
+        "text": "Jupp!",
+        "nextId": "256"
+      }
+    ]
+  },
+  {
+    "id": "254",
+    "type": "quote",
+    "text": "Es ist leichter sich das Ende der Welt als das Ende des Kapitalismus vorzustellen. — Slavoj Žižek",
+    "options": []
+  },
+  {
+    "id": "256",
+    "type": "diamond",
+    "text": "Sind das gerechte und demokratische Lösungen?",
+    "options": [
+      {
+        "text": "Nö!",
+        "nextId": "255"
+      },
+      {
+        "text": "Jupp!",
+        "nextId": "261"
+      }
+    ]
+  },
+  {
+    "id": "264",
+    "type": "border",
+    "text": "Geo-Engineering – vorsätzliche Eingriffe in  die Ökosysteme der Erde, wie zum Beispiel Aerosol- Injektion in die Stratosphäre.",
+    "options": [
+      {
+        "text": "»Eine schreckliche Idee, die wir vielleicht anwenden müssen«",
+        "nextId": "266"
+      }
+    ]
+  },
+  {
+    "id": "272",
+    "type": "quote",
+    "text": "Ja, wir scheitern, aber es bleibt noch Zeit, alles zu ändern. — Greta Thunberg",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "274",
+    "type": "quote",
+    "text": "…jetzt so zu leben, wie wir glauben, dass Menschen leben sollten, trotz all dem Übel um uns, ist für sich schon ein wunderbarer Sieg. — Howard Zinn",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "276",
+    "type": "quote",
+    "text": "Wenn wir die letzten unserer Art sind, warum dann nicht die besten unserer Art sein? — Guy McPherson",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "277"
+      }
+    ]
+  },
+  {
+    "id": "277",
+    "type": "quote",
+    "text": "Bezeuge die ganze Geschichte der Menschheit mit tragischen Augen. — Jamey Hecht",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "278"
+      }
+    ]
+  },
+  {
+    "id": "278",
+    "type": "cloud",
+    "text": "Errichtet unserem Scheitern als Gattung ein Denkmal.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "279"
+      }
+    ]
+  },
+  {
+    "id": "279",
+    "type": "cloud",
+    "text": "Die Erde als Sterbestation.",
+    "options": []
+  },
+  {
+    "id": "280",
+    "type": "rectangle",
+    "text": "Endspiel",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "279"
+      }
+    ]
+  },
+  {
+    "id": "281",
+    "type": "diamond",
+    "text": "Wie willst du untergehen?",
+    "options": [
+      {
+        "text": "Mit Gewinn",
+        "nextId": "285"
+      },
+      {
+        "text": "Stoisch",
+        "nextId": "287"
+      },
+      {
+        "text": "Poetisch",
+        "nextId": "283"
+      },
+      {
+        "text": "Strategisch",
+        "nextId": "289"
+      },
+      {
+        "text": "Ehrenvoll",
+        "nextId": "293"
+      },
+      {
+        "text": "Unglücklich",
+        "nextId": "291"
+      },
+      {
+        "text": "Dankbar",
+        "nextId": "295"
+      },
+      {
+        "text": "Tragi-komisch",
+        "nextId": "297"
+      },
+      {
+        "text": "Gerecht",
+        "nextId": "299"
+      },
+      {
+        "text": "Kreativ",
+        "nextId": "329"
+      },
+      {
+        "text": "Resilient",
+        "nextId": "331"
+      },
+      {
+        "text": "Gemeinschaftlich",
+        "nextId": "301"
+      },
+      {
+        "text": "Allein",
+        "nextId": "320"
+      },
+      {
+        "text": "Mutig",
+        "nextId": "311"
+      },
+      {
+        "text": "Paradox",
+        "nextId": "315"
+      }
+    ]
+  },
+  {
+    "id": "283",
+    "type": "cloud",
+    "text": "Ich suche Schönheit und Bedeutung beim Scheitern, das Unvermeidliche aufzuhalten.",
+    "options": []
+  },
+  {
+    "id": "285",
+    "type": "cloud",
+    "text": "Die Apokalypse ist mein Goldesel.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "280"
+      }
+    ]
+  },
+  {
+    "id": "287",
+    "type": "cloud",
+    "text": "Was würde Marc Aurel machen?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "289",
+    "type": "cloud",
+    "text": "Planst du nicht für die Apokalypse, wirst du Teil des Apokalypse-Plans von jemand anderem.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "291",
+    "type": "cloud",
+    "text": "Aber nicht so unglücklich, dass ich meinen Mitmenschen Schlimmes antue.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "293",
+    "type": "cloud",
+    "text": "Ich werde mit erhobenem Haupt zugrunde gehen.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "295",
+    "type": "cloud",
+    "text": "Selbst eine beschädigte Welt hält uns, schenkt uns Momente von Zauber und Freude. Ich ziehe Freude der Verzweiflung vor, denn die Erde gibt mir täglich Freude und ich sollte das Geschenk erwidern. — Robin Wall Kimmere",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "297",
+    "type": "cloud",
+    "text": "Ohne Galgenhumor bleiben uns nur die Galgen.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "299",
+    "type": "quote",
+    "text": "Wir werden leiden, also lasst uns das Leiden gerecht verteilen. — Gopal Dayaneni",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "329",
+    "type": "quote",
+    "text": "Verwandelt die neue Normalität in neue Schönheit. — John Michael Greer",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "304"
+      }
+    ]
+  },
+  {
+    "id": "331",
+    "type": "quote",
+    "text": "Die Welt fällt auseinander, aber wir nicht. — Alejandro Frid",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "304"
+      }
+    ]
+  },
+  {
+    "id": "301",
+    "type": "cloud",
+    "text": "Gemeinsam können wir es überwinden.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "302"
+      }
+    ]
+  },
+  {
+    "id": "302",
+    "type": "quote",
+    "text": "Vielleicht weckt die schlimmste aller Zeiten das Beste in uns. — Rebecca Solnit",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "303"
+      }
+    ]
+  },
+  {
+    "id": "303",
+    "type": "quote",
+    "text": "Fallen, als ob wir ein Kind an unserer Brust halten. — adrienne maree brown",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "304"
+      }
+    ]
+  },
+  {
+    "id": "304",
+    "type": "cloud",
+    "text": "Eine andere Welt (oder deren Ende) ist möglich.",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "326"
+      }
+    ]
+  },
+  {
+    "id": "306",
+    "type": "diamond",
+    "text": "Worauf konzentrieren? Klimaschutz, Anpassung oder Leiden?",
+    "options": [
+      {
+        "text": "Alle Drei",
+        "nextId": "304"
+      }
+    ]
+  },
+  {
+    "id": "308",
+    "type": "quote",
+    "text": "Sei nützlich, auch wenn du nicht weißt, ob du Hebamme oder Sterbehelfer bist. — Joanna Macy",
+    "options": [
+      {
+        "text": "Also...",
+        "nextId": "306"
+      }
+    ]
+  },
+  {
+    "id": "311",
+    "type": "quote",
+    "text": "Wenn es zu spät ist, gibt es umso mehr, wofür es sich lohnt zu kämpfen. — Tim DeChristopher",
+    "options": [
+      {
+        "text": "Nein, es ist mehr oder weniger viel zu spät",
+        "nextId": "318"
+      }
+    ]
+  },
+  {
+    "id": "315",
+    "type": "quote",
+    "text": "Nachgeben ohne aufzugeben. — Meg Wheatley",
+    "options": []
+  },
+  {
+    "id": "316",
+    "type": "cloud",
+    "text": "Hoffnungslosigkeit kann die Welt retten.",
+    "options": [
+      {
+        "text": "Verzweiflung ist unsere einzige Hoffnung",
+        "nextId": "316"
+      }
+    ]
+  },
+  {
+    "id": "320",
+    "type": "cloud",
+    "text": "Ich habe vorgesorgt.",
+    "options": [
+      {
+        "text": "Prepper, vereinigt euch?",
+        "nextId": "325"
+      },
+      {
+        "text": "Scheiß auf dich!",
+        "nextId": "null"
+      },
+      {
+        "text": "Und dich!",
+        "nextId": ""
+      },
+      {
+        "text": "Und dich!",
+        "nextId": ""
+      }
+    ]
+  },
+  {
+    "id": "326",
+    "type": "cloud",
+    "text": "Ich will eine bessere Katastrophe",
+    "options": []
+  },
+  {
+    "id": "9",
+    "type": "rectangle",
+    "text": "Ich mag deine Lösungen nicht, also sind sie falsch",
+    "options": [
+      {
+        "text": "Ändert sich das Klima nicht eh dauernd?",
+        "nextId": "11"
+      }
+    ]
+  },
+  {
+    "id": "38",
+    "type": "rectangle",
+    "text": "Was meinst du mit »noch«?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "39"
+      }
+    ]
+  },
+  {
+    "id": "18",
+    "type": "rectangle",
+    "text": "Die Apokalypse wird Anderen passieren",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "19"
+      },
+      {
+        "text": "Wem?!",
+        "nextId": "28"
+      }
+    ]
+  },
+  {
+    "id": "21",
+    "type": "rectangle",
+    "text": "Es ist kompliziert…",
+    "options": [
+      {
+        "text": "...oder ein wenig rassistisch bist?",
+        "nextId": "21"
+      },
+      {
+        "text": "Unfreiwillige Migration",
+        "nextId": "63"
+      },
+      {
+        "text": "Rassismus",
+        "nextId": "64"
+      },
+      {
+        "text": "Kapitalismus",
+        "nextId": "65"
+      }
+    ]
+  },
+  {
+    "id": "32",
+    "type": "rectangle",
+    "text": "Selber Sturm, unterschiedliche Boote",
+    "options": [
+      {
+        "text": "Also…",
+        "nextId": "34"
+      }
+    ]
+  },
+  {
+    "id": "20",
+    "type": "rectangle",
+    "text": "...oder ein wenig rassistisch bist?",
+    "options": [
+      {
+        "text": "Es ist kompliziert…",
+        "nextId": "20"
+      },
+      {
+        "text": "Mist!",
+        "nextId": "23"
+      }
+    ]
+  },
+  {
+    "id": "44",
+    "type": "rectangle",
+    "text": "Hä?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "45"
+      }
+    ]
+  },
+  {
+    "id": "47",
+    "type": "rectangle",
+    "text": "Weil…",
+    "options": [
+      {
+        "text": "…diejenigen, die das Problem lösen wollen, zugleich die sind, die es verursachen!",
+        "nextId": "49"
+      }
+    ]
+  },
+  {
+    "id": "59",
+    "type": "rectangle",
+    "text": "Wasser",
+    "options": [
+      {
+        "text": "Gesundheit",
+        "nextId": "61"
+      }
+    ]
+  },
+  {
+    "id": "75",
+    "type": "rectangle",
+    "text": "Kohlenstoff",
+    "options": [
+      {
+        "text": "der Lebenssaft für",
+        "nextId": "67"
+      }
+    ]
+  },
+  {
+    "id": "148",
+    "type": "rectangle",
+    "text": "Wir stürzen nicht in einen Abgrund",
+    "options": [
+      {
+        "text": "(Puh!)",
+        "nextId": "150"
+      }
+    ]
+  },
+  {
+    "id": "116",
+    "type": "rectangle",
+    "text": "Können wir den Kurs noch ändern?",
+    "options": [
+      {
+        "text": "Ich habe 2 Kinder, 3 Jobs und einen Haufen unbezahlter Rechnungen. Kümmer DU dich!",
+        "nextId": "120"
+      },
+      {
+        "text": "Haben wir schon mal (oder so ähnlich), als wir die Ozonschicht repariert haben",
+        "nextId": "120"
+      },
+      {
+        "text": "Nö.",
+        "nextId": "182"
+      }
+    ]
+  },
+  {
+    "id": "109",
+    "type": "rectangle",
+    "text": "Können wir den nochmal gucken?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "110"
+      }
+    ]
+  },
+  {
+    "id": "123",
+    "type": "rectangle",
+    "text": "Wir haben nicht das Recht zu fragen, ob es uns gelingen wird oder nicht…",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "124"
+      },
+      {
+        "text": "Trotzdem...",
+        "nextId": "127"
+      }
+    ]
+  },
+  {
+    "id": "198",
+    "type": "rectangle",
+    "text": "Echt, müssen wir?",
+    "options": [
+      {
+        "text": "Wenn nicht du, wer dann?",
+        "nextId": "200"
+      }
+    ]
+  },
+  {
+    "id": "130",
+    "type": "rectangle",
+    "text": "Die Welt hat schon andere Pläne",
+    "options": [
+      {
+        "text": "Also, was jetzt?",
+        "nextId": "188"
+      }
+    ]
+  },
+  {
+    "id": "143",
+    "type": "rectangle",
+    "text": "Flowchart im Buch",
+    "options": [
+      {
+        "text": "»I Want a Better Catastrophe«",
+        "nextId": "141"
+      }
+    ]
+  },
+  {
+    "id": "146",
+    "type": "rectangle",
+    "text": "Verdammt!",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "186"
+      }
+    ]
+  },
+  {
+    "id": "188",
+    "type": "rectangle",
+    "text": "Wir müssen uns unserer Verantwortung stellen.",
+    "options": [
+      {
+        "text": "Echt, müssen wir?",
+        "nextId": "199"
+      }
+    ]
+  },
+  {
+    "id": "173",
+    "type": "rectangle",
+    "text": "Und sie sollen wissen, dass ich alles getan habe, was ich konnte",
+    "options": [
+      {
+        "text": "Wir müssen uns unserer Verantwortung stellen.",
+        "nextId": "198"
+      }
+    ]
+  },
+  {
+    "id": "195",
+    "type": "rectangle",
+    "text": "Weil…",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "193"
+      }
+    ]
+  },
+  {
+    "id": "240",
+    "type": "rectangle",
+    "text": "Wir sind ~Räuber~ Partner",
+    "options": [
+      {
+        "text": "Menschheit = ~Parasiten~ Experiment",
+        "nextId": "242"
+      }
+    ]
+  },
+  {
+    "id": "211",
+    "type": "rectangle",
+    "text": "Intelligente Straßen",
+    "options": [
+      {
+        "text": "Nullenergie-Architektur",
+        "nextId": "213"
+      }
+    ]
+  },
+  {
+    "id": "267",
+    "type": "rectangle",
+    "text": "Ich bin die Antenne der Menschheit",
+    "options": [
+      {
+        "text": "...und das tut weh",
+        "nextId": "266"
+      }
+    ]
+  },
+  {
+    "id": "229",
+    "type": "rectangle",
+    "text": "Stimmt, aber...",
+    "options": [
+      {
+        "text": "Haben wir noch genug Zeit?",
+        "nextId": "262"
+      }
+    ]
+  },
+  {
+    "id": "235",
+    "type": "rectangle",
+    "text": "Alles und Alle",
+    "options": [
+      {
+        "text": "Künstler;Ingenieurin;Erzähler;Heilerin;Trickster;Philosophin;Kriegerin;Guter Nachbar",
+        "nextId": "267"
+      },
+      {
+        "text": "Eigentlich nur ein paar Sachen…",
+        "nextId": "251"
+      }
+    ]
+  },
+  {
+    "id": "246",
+    "type": "rectangle",
+    "text": "Green New Deal",
+    "options": [
+      {
+        "text": "Ende aller neuen Projekte zur Förderung fossiler Rohstoffe",
+        "nextId": "248"
+      }
+    ]
+  },
+  {
+    "id": "231",
+    "type": "rectangle",
+    "text": "Schreib mir nicht vor wie ich leben soll!",
+    "options": [
+      {
+        "text": "Nicht so oft duschen",
+        "nextId": "231"
+      }
+    ]
+  },
+  {
+    "id": "266",
+    "type": "rectangle",
+    "text": "Künstler;Ingenieurin;Erzähler;Heilerin;Trickster;Philosophin;Kriegerin;Guter Nachbar",
+    "options": [
+      {
+        "text": "Ich bin die Antenne der Menschheit",
+        "nextId": "268"
+      },
+      {
+        "text": "Legen wir los!",
+        "nextId": "270"
+      }
+    ]
+  },
+  {
+    "id": "218",
+    "type": "rectangle",
+    "text": "Hä?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "219"
+      }
+    ]
+  },
+  {
+    "id": "253",
+    "type": "rectangle",
+    "text": "Nur noch mehr beschönigender Blödsinn",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "251"
+      }
+    ]
+  },
+  {
+    "id": "255",
+    "type": "rectangle",
+    "text": "Nur die gleiche alte Ungleichheits- und Ausbeutungs-Leier angetrieben von erneuerbarer Energie",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "254"
+      },
+      {
+        "text": "Weiter",
+        "nextId": "256"
+      }
+    ]
+  },
+  {
+    "id": "261",
+    "type": "rectangle",
+    "text": "Aber...",
+    "options": [
+      {
+        "text": "Haben wir noch genug Zeit?",
+        "nextId": "262"
+      }
+    ]
+  },
+  {
+    "id": "318",
+    "type": "rectangle",
+    "text": "Alsoooo...",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "281"
+      }
+    ]
+  },
+  {
+    "id": "325",
+    "type": "rectangle",
+    "text": "Du hast nichts zu verlieren, außer deines einsamen Bunkers",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "301"
+      }
+    ]
+  },
+  {
+    "id": "11",
+    "type": "rectangle",
+    "text": "Gott wird eingreifen bevor es zu schlimm wird",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "4"
+      }
+    ]
+  },
+  {
+    "id": "63",
+    "type": "rectangle",
+    "text": "Rassismus",
+    "options": [
+      {
+        "text": "Kapitalismus",
+        "nextId": "65"
+      }
+    ]
+  },
+  {
+    "id": "64",
+    "type": "rectangle",
+    "text": "Kapitalismus",
+    "options": [
+      {
+        "text": "Demokratie",
+        "nextId": "66"
+      }
+    ]
+  },
+  {
+    "id": "65",
+    "type": "rectangle",
+    "text": "Demokratie",
+    "options": [
+      {
+        "text": "Männlichkeit",
+        "nextId": "67"
+      }
+    ]
+  },
+  {
+    "id": "23",
+    "type": "rectangle",
+    "text": "Was kann ich machen?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "24"
+      }
+    ]
+  },
+  {
+    "id": "49",
+    "type": "rectangle",
+    "text": "Und die Zeit wird knapp!",
+    "options": [
+      {
+        "text": "Weshalb der Klimawandel ein »Superkomplexes Problem« ist",
+        "nextId": "44"
+      }
+    ]
+  },
+  {
+    "id": "61",
+    "type": "rectangle",
+    "text": "Artenvielfalt",
+    "options": [
+      {
+        "text": "Unfreiwillige Migration",
+        "nextId": "63"
+      }
+    ]
+  },
+  {
+    "id": "67",
+    "type": "rectangle",
+    "text": "Industrielle Zivilisation",
+    "options": [
+      {
+        "text": "Narrative",
+        "nextId": "69"
+      },
+      {
+        "text": "Also...",
+        "nextId": "54"
+      }
+    ]
+  },
+  {
+    "id": "150",
+    "type": "rectangle",
+    "text": "Sondern nur einen schartigen, rutschigen Steilhang runter",
+    "options": [
+      {
+        "text": "(Oh)",
+        "nextId": "182"
+      }
+    ]
+  },
+  {
+    "id": "200",
+    "type": "rectangle",
+    "text": "Gott?",
+    "options": [
+      {
+        "text": "Der Bund für Naturschutz?",
+        "nextId": "199"
+      }
+    ]
+  },
+  {
+    "id": "199",
+    "type": "rectangle",
+    "text": "Wenn nicht du, wer dann?",
+    "options": [
+      {
+        "text": "Gott?",
+        "nextId": "201"
+      },
+      {
+        "text": "Wenn nicht jetzt, wann dann?",
+        "nextId": "203"
+      }
+    ]
+  },
+  {
+    "id": "242",
+    "type": "rectangle",
+    "text": "Das moralische Gegenstück zum Krieg?",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "238"
+      }
+    ]
+  },
+  {
+    "id": "213",
+    "type": "rectangle",
+    "text": "Marine Permakultur",
+    "options": [
+      {
+        "text": "Direct Air Capture",
+        "nextId": "211"
+      }
+    ]
+  },
+  {
+    "id": "262",
+    "type": "rectangle",
+    "text": "Vor 30 Jahren hatten wir die",
+    "options": [
+      {
+        "text": "Haben wir noch genug Zeit?",
+        "nextId": "262"
+      }
+    ]
+  },
+  {
+    "id": "248",
+    "type": "rectangle",
+    "text": "Und so vieles mehr...",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "244"
+      },
+      {
+        "text": "Aber...",
+        "nextId": "251"
+      }
+    ]
+  },
+  {
+    "id": "268",
+    "type": "rectangle",
+    "text": "...und das tut weh",
+    "options": [
+      {
+        "text": "Künstler;Ingenieurin;Erzähler;Heilerin;Trickster;Philosophin;Kriegerin;Guter Nachbar",
+        "nextId": "267"
+      }
+    ]
+  },
+  {
+    "id": "270",
+    "type": "rectangle",
+    "text": "Aber...",
+    "options": [
+      {
+        "text": "Haben wir noch genug Zeit?",
+        "nextId": "262"
+      }
+    ]
+  },
+  {
+    "id": "66",
+    "type": "rectangle",
+    "text": "Männlichkeit",
+    "options": [
+      {
+        "text": "Industrielle Zivilisation",
+        "nextId": "68"
+      }
+    ]
+  },
+  {
+    "id": "69",
+    "type": "rectangle",
+    "text": "Charakter",
+    "options": [
+      {
+        "text": "Fantasie",
+        "nextId": "71"
+      }
+    ]
+  },
+  {
+    "id": "201",
+    "type": "rectangle",
+    "text": "Der Bund für Naturschutz?",
+    "options": [
+      {
+        "text": "Wenn nicht du, wer dann?",
+        "nextId": "200"
+      }
+    ]
+  },
+  {
+    "id": "203",
+    "type": "rectangle",
+    "text": "Wie wäre es mit nie?",
+    "options": [
+      {
+        "text": "Wenn nicht jetzt, wann dann?",
+        "nextId": "203"
+      }
+    ]
+  },
+  {
+    "id": "68",
+    "type": "rectangle",
+    "text": "Narrative",
+    "options": [
+      {
+        "text": "Charakter",
+        "nextId": "70"
+      }
+    ]
+  },
+  {
+    "id": "71",
+    "type": "rectangle",
+    "text": "»Wirklichkeit«",
+    "options": [
+      {
+        "text": "Das Sein an sich",
+        "nextId": "73"
+      }
+    ]
+  },
+  {
+    "id": "70",
+    "type": "rectangle",
+    "text": "Fantasie",
+    "options": [
+      {
+        "text": "»Wirklichkeit«",
+        "nextId": "72"
+      }
+    ]
+  },
+  {
+    "id": "72",
+    "type": "rectangle",
+    "text": "Das Sein an sich",
+    "options": [
+      {
+        "text": "Weiter",
+        "nextId": "73"
+      }
+    ]
+  }
+]
 };
 
+// legacy
 export const nodes: StaticNode[] = [
   { id: '1', type: 'diamond', data: { label: 'Ist der Klimawandel real?' } },
   { id: '2', type: 'option', data: { label: 'Nö!' } },
@@ -398,6 +2548,7 @@ export const nodes: StaticNode[] = [
   { id: '326', type: 'cloud', data: { label: 'Ich will eine bessere Katastrophe' } },
 ];
 
+// legacy
 export const edges: StaticEdge[] = [
   { source: '1', target: '6' },
   { source: '6', target: '1' },

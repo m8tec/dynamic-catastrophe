@@ -1,8 +1,23 @@
 import { ThemeName } from '@/constants/theme';
 
-export interface ScenarioMetadata {
+export type NodeType = 'diamond' | 'circle' | 'cloud' | 'rectangle' | 'quote' | 'curved' | 'border' | 'option' | 'options';
+
+export interface ScenarioOption {
+  text: string;
+  nextId: string | undefined;
+}
+
+export interface ScenarioNode {
+  id: string;
+  type: NodeType;
+  text: string;
+  options: ScenarioOption[];
+}
+
+export interface ScenarioData {
   title: string;
   description: string;
-  teaserImage?: string;
   theme?: ThemeName;
+  teaserImage?: string;
+  scenario: ScenarioNode[];
 }

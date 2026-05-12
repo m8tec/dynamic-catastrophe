@@ -22,9 +22,9 @@ async function getAvailableScenarios() {
       const module = await import(`@/data/scenarios/${file}`);
       scenarios.push({
         id,
-        title: module.metadata?.title || id,
-        description: module.metadata?.description || "Keine Beschreibung verfügbar.",
-        teaserImage: module.metadata?.teaserImage || null,
+        title: module.data?.title || id,
+        description: module.data?.description || "Keine Beschreibung verfügbar.",
+        teaserImage: module.data?.teaserImage || null,
       });
     } catch (e) {
       console.error(`Konnte Metadaten für ${file} nicht laden.`, e);

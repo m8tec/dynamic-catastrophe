@@ -3,6 +3,7 @@ import { getStaticScenario } from "@/lib/staticData";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { parseScenarioToFlow } from "@/utils/scenarioParser";
+import LoadingError from "@/components/play/LoadingError";
 
 export async function generateMetadata({
   searchParams,
@@ -37,9 +38,10 @@ export default async function PlayPage({
 
   if (!data) {
     return (
-      <main className="w-full h-screen bg-[#121212] flex items-center justify-center">
-        <div className="text-xl font-vesper text-white">Szenario nicht gefunden.</div>
-      </main>
+      <LoadingError 
+        title="Szenario verschollen"
+        message={`Das Szenario "${scenario || 'Unbekannt'}" existiert nicht. Vielleicht hat die Apokalypse es bereits verschlungen.`} 
+      />
     );
   }
 

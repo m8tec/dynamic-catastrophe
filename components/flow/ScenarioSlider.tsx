@@ -5,27 +5,28 @@ import Link from "next/link";
 import { useTheme } from "@/contexts/ThemeContext";
 import { TYPOGRAPHY } from "@/constants/theme";
 
-export interface SidebarData {
-  title: string;
-  description: string;
-  teaserImage?: string | null;
-  prompt?: string | null;
-}
-
 interface ScenarioSidebarProps {
-  data: SidebarData;
+  description: string;
   isDynamic: boolean;
-  onRevealAll?: () => void;
-  onReset?: () => void;
-  onCenterStart?: () => void;
+  onCenterStart: () => void;
+  onExport: () => void;
+  onRevealAll: () => void;
+  onReset: () => void;
+  prompt?: string;
+  teaserImage?: string;
+  title: string;
 }
 
 export default function ScenarioSidebar({
-  data,
+  description,
   isDynamic,
+  onCenterStart,
+  onExport,
   onRevealAll,
   onReset,
-  onCenterStart, // <-- NEU
+  prompt,
+  teaserImage,
+  title
 }: ScenarioSidebarProps) {
   const theme = useTheme();
   const [isOpen, setIsOpen] = useState(true);
@@ -111,11 +112,11 @@ export default function ScenarioSidebar({
             Flucht
           </Link>
 
-          {data.teaserImage ? (
+          {teaserImage ? (
             <div className="relative w-full h-48 shrink-0">
               <div
                 className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url('${data.teaserImage}')` }}
+                style={{ backgroundImage: `url('${teaserImage}')` }}
               />
               <div
                 className="absolute inset-0"
@@ -130,7 +131,7 @@ export default function ScenarioSidebar({
 
           <div
             className={`px-6 pb-6 flex flex-col gap-6 relative z-10 ${
-              data.teaserImage ? "-mt-12" : "mt-16"
+              teaserImage ? "-mt-12" : "mt-16"
             }`}
           >
             <div>
@@ -141,7 +142,7 @@ export default function ScenarioSidebar({
                   fontFamily: TYPOGRAPHY.nodeFontFamily,
                 }}
               >
-                {data.title}
+                {title}
               </h2>
               <div
                 className="w-12 h-1 mt-3 rounded-full"
@@ -153,10 +154,10 @@ export default function ScenarioSidebar({
               className="text-sm leading-relaxed opacity-90"
               style={{ color: theme.nodeTextInactive }}
             >
-              {data.description}
+              {description}
             </p>
 
-            {isDynamic && data.prompt && (
+            {isDynamic && prompt && (
               <div
                 className="mt-2 p-4 rounded-md border border-dashed"
                 style={{
@@ -177,7 +178,7 @@ export default function ScenarioSidebar({
                     fontFamily: TYPOGRAPHY.nodeFontFamily,
                   }}
                 >
-                  "{data.prompt}"
+                  "{prompt}"
                 </div>
               </div>
             )}
@@ -248,6 +249,7 @@ export default function ScenarioSidebar({
 
             <button
               className="w-full py-3 px-4 rounded-md text-sm font-semibold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2 group"
+              onClick={onExport}
               style={{
                 backgroundColor: "transparent",
                 border: `1px solid ${theme.nodeBorderInactive}`,

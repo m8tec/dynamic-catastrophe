@@ -1,6 +1,6 @@
 import { ThemeName } from '@/constants/theme';
 
-export type NodeType = 'diamond' | 'circle' | 'cloud' | 'rectangle' | 'quote' | 'curved' | 'border' | 'option' | 'options';
+export type NodeType = 'circle' | 'cloud' | 'curved' | 'definition' | 'diamond' | 'option' | 'options' | 'quote' | 'rectangle';
 
 export interface ScenarioOption {
   text: string;

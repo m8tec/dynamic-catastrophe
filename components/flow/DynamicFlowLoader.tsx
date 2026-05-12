@@ -17,6 +17,7 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
     title: string;
     description: string;
     theme: ThemeName;
+    rawScenario?: any[];
   }>({
     title: "Generiere...",
     description: "...",
@@ -52,6 +53,7 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
             description:
               data.description || "Die KI schweigt über die Details.",
             theme: data.theme || "blood",
+            rawScenario: data.scenario,
           });
 
           setNodes(flowNodes);
@@ -86,16 +88,15 @@ export default function DynamicFlowLoader({ topic }: { topic: string }) {
 
   return (
     <FlowCanvas
+      description={aiData.description}
       initialNodes={nodes}
       initialEdges={edges}
       isDynamicMode={true}
+      prompt={topic}
+      rawScenario={aiData.rawScenario}
       startNodeId="q1"
       theme={aiData.theme}
-      sidebarData={{
-        title: aiData.title,
-        description: aiData.description,
-        prompt: topic,
-      }}
+      title={aiData.title}
     />
   );
 }

@@ -21,14 +21,25 @@ Regeln für den Inhalt:
 5. Wähle ein passendes Theme: "abyss", "default", "fallout", "gore", "madness", "rust", "toxic" oder "void".
 
 Regeln für den Graphen:
-1. KEINE SACKGASSEN! JEDE Node (absolut egal ob "diamond", "circle", "cloud" oder "rectangle") MUSS zwingend ein "options"-Array haben!
+1. KEINE SACKGASSEN! JEDE Node MUSS zwingend ein "options"-Array haben!
 2. Jede Node MUSS 1 bis 3 Optionen haben. RECHTECKE ("rectangle") MÜSSEN exakt 1 Option haben (z.B. "Weiter").
 3. Es MUSS Loops geben! Lass den User bei Ausreden leiden und setze als "nextId" dann wieder "q1" oder eine andere frühere Frage, um ihn im Kreis drehen zu lassen.
-4. Nutze als Node-Typen NUR: "diamond", "circle", "cloud", "rectangle".
+4. Nutze als Node-Typen NUR: "circle", "cloud", "curved", "definition",  "diamond", "option", "options", "rectangle", "quote"
 5. Die allererste Node MUSS die ID "q1" haben.
 6. Generiere EXAKT 15 Nodes im Array. Schreibe NIEMALS Nummern wie (1/15) in den Text!
 7. Jeder Text darf maximal 70 Zeichen lang sein.
 8. WICHTIG: Die "nextId" bei den Optionen MUSS zwingend eine existierende "id" (z.B. "q1", "q2"...) aus deinem generierten Array sein! Erfinde keine IDs!
+
+Regeln für die Nodes:
+- "circle" NUR für Fragen des Erzählers.
+- "cloud" NUR für Gedanken oder Einwände des Lesers.
+- "curved" NUR für sarkastische Antworten des Lesers.
+- "definition" NUR für kurze Definitionen oder sachliche Erklärungen.
+- "diamond" NUR für Fragen des Erzählers, die mehrere Optionen bieten.
+- "option" als normale Antwort-Optionen auf beliebige Node Types.
+- "options" NUR für großen Kasten mit mehreren Antwort-Optionen, aufgesplittet durch Künstler;Ingenieur;Erzähler;Heilerin
+- "rectangle" NUR für fettgedruckte, bedeutende Antwortmöglichkeiten.
+- "quote" NUR für passende Zitate, entweder von echten Personen oder frei erfunden.
 
 Herangehensweise:
 1. Durch die erste Frage muss die peinliche Realität sofort auf dem Tisch liegen.

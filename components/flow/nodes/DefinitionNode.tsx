@@ -13,7 +13,7 @@ interface BorderNodeProps {
   };
 }
 
-export default function BorderNode({ id, data }: BorderNodeProps) {
+export default function DefinitionNode({ id, data }: BorderNodeProps) {
   const isActive = data.isActive;
   const isDiscovered = data.isDiscovered;
   const isSelectable = data.isSelectable;

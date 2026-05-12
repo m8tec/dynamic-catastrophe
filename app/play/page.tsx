@@ -61,15 +61,14 @@ export default async function PlayPage({
     <main className="w-full h-screen bg-[#121212]">
       {data ? (
         <FlowCanvas
+          description={data.metadata?.description || 'Keine Aufzeichnungen vorhanden.'}
           initialNodes={data.nodes} 
           initialEdges={data.edges}
           isDynamicMode={false}
-          sidebarData={{
-            title: data.metadata?.title || 'Unbekanntes Szenario',
-            description: data.metadata?.description || 'Keine Aufzeichnungen vorhanden.',
-            teaserImage: data.metadata?.teaserImage,
-          }}
+          rawScenario={data.metadata?.scenario}
+          teaserImage={data.metadata?.teaserImage}
           theme={data.metadata?.theme}
+          title={data.metadata?.title || 'Unbekanntes Szenario'}
         />
       ) : (
         <div className="w-full h-screen flex items-center justify-center bg-[#121212] text-white">

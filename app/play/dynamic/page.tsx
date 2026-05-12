@@ -1,37 +1,57 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import FlowCanvas from "@/components/flow/FlowCanvas";
-import DynamicFlowLoader from "@/components/flow/DynamicFlowLoader";
-import { getStaticScenario } from "@/lib/staticData";
-import { Metadata } from "next";
-import { redirect } from "next/navigation";
+import LoadingError from "@/components/play/LoadingError";
+import { parseScenarioToFlow } from "@/utils/scenarioParser";
+import { ThemeName } from "@/constants/theme";
 
-export async function generateMetadata({
-  params,
-  searchParams,
-}: {
-  params: Promise<any>;
-  searchParams: Promise<{ prompt?: string }>;
-}): Promise<Metadata> {
-  const { prompt } = await searchParams;
-
-  const decodedTopic = prompt ? decodeURIComponent(prompt) : "";
-  return {
-    title: `KI-Szenario${decodedTopic ? `: ${decodedTopic}` : ``} | Dynamic Catastrophe`,
-  };
+interface DynamicData {
+  title: string;
+  description: string;
+  theme: ThemeName;
+  scenario: any[];
+  prompt?: string;
 }
 
-export default async function PlayPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ prompt?: string }>;
-}) {
-  const { prompt } = await searchParams;
+export default function DynamicPlayPage() {
+  const [data, setData] = useState<DynamicData | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
-  const decodedTopic = prompt
-    ? decodeURIComponent(prompt)
-    : "Unbekanntes Grauen";
+  useEffect(() => {
+    const stored = sessionStorage.getItem("dynamicScenario");
+    if (stored) {
+      setData(JSON.parse(stored));
+    }
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return <div className="w-full h-screen bg-[#121212]" />;
+
+  if (!data) {
+    return (
+      <LoadingError
+        title="Kein Szenario gefunden"
+        message="Der Äther ist leer. Bitte kehre zur Startseite zurück und generiere eine neue Katastrophe."
+      />
+    );
+  }
+
+  const { nodes, edges } = parseScenarioToFlow(data.scenario);
+  
   return (
     <main className="w-full h-screen bg-[#121212]">
-      <DynamicFlowLoader topic={decodedTopic} />
+      <FlowCanvas
+        title={data.title}
+        description={data.description}
+        prompt={data.prompt}
+        theme={data.theme}
+        rawScenario={data.scenario}
+        initialNodes={nodes}
+        initialEdges={edges}
+        isDynamicMode={true}
+        startNodeId={nodes[0]?.id || "q1"}
+      />
     </main>
   );
 }

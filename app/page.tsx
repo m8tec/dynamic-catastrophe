@@ -1,6 +1,7 @@
 import HeroBanner from "@/components/home/HeroBanner";
 import StaticScenarios from "@/components/home/StaticScenarios";
 import DynamicScenarioForm from "@/components/home/DynamicScenarioForm";
+import UploadScenario from "@/components/home/UploadScenario";
 import AmbientAudio from "@/components/home/AmbientAudio";
 
 export default function Home() {
@@ -9,7 +10,10 @@ export default function Home() {
       <AmbientAudio src="/audio/home.mp3" />
       
       <HeroBanner />
-      <DynamicScenarioForm />
+      <div className="mb-1">
+        <DynamicScenarioForm />
+        <UploadScenario />
+      </div>
       <StaticScenarios />
     </main>
   );

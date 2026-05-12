@@ -139,6 +139,7 @@ export default function FlowCanvas({
     const dataToExport = {
       title,
       description,
+      prompt,
       theme: theme || "default",
       scenario: rawScenario || [],
     };

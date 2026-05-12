@@ -14,8 +14,7 @@ export default function DynamicScenarioForm() {
             Wirkung spinnen. Welches Thema hält dich nachts wach?
           </p>
 
-          <form action="/play" method="GET" className="flex flex-col sm:flex-row gap-4">
-            <input type="hidden" name="mode" value="dynamic" />
+          <form action="/play/dynamic/" method="GET" className="flex flex-col sm:flex-row gap-4">
             <input
               type="text"
               name="topic"

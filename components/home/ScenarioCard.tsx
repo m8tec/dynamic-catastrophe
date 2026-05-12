@@ -3,7 +3,7 @@ import Link from "next/link";
 export default async function ScenarioCard({ scenario }: { scenario: any }) {
   return (
     <Link
-      href={`/play?mode=static&scenario=${scenario.id}`}
+      href={`/play/static/?scenario=${scenario.id}`}
       className="group relative flex flex-col justify-between rounded-xl border border-neutral-800 hover:border-red-500/50 overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1 min-h-[240px]"
     >
       {scenario.teaserImage ? (

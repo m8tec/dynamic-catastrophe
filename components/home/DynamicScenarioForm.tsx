@@ -17,8 +17,26 @@ export default function DynamicScenarioForm() {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
   
-  const router = useRouter();
+  const [isOllamaOnline, setIsOllamaOnline] = useState<boolean>(true);
   
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkOllamaStatus = async () => {
+      try {
+        const res = await fetch("/api/health");
+        setIsOllamaOnline(res.ok);
+      } catch (err) {
+        setIsOllamaOnline(false);
+      }
+    };
+
+    checkOllamaStatus();
+
+    const interval = setInterval(checkOllamaStatus, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   useEffect(() => {
     if (!isLoading) return;
     const interval = setInterval(() => {
@@ -47,9 +65,7 @@ export default function DynamicScenarioForm() {
 
       if (data.scenario) {
         const scenarioData = { ...data, prompt: topic };
-
         sessionStorage.setItem("dynamicScenario", JSON.stringify(scenarioData));
-
         router.push(`/play/dynamic?prompt=${encodeURIComponent(topic)}`);
       } else {
         throw new Error("KI hat kein 'scenario' Array geliefert.");
@@ -58,6 +74,7 @@ export default function DynamicScenarioForm() {
       console.error("Fetch Error:", err);
       setError("Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.");
       setIsLoading(false);
+      setIsOllamaOnline(false); 
     }
   };
 
@@ -80,22 +97,36 @@ export default function DynamicScenarioForm() {
                 Wirkung spinnen. Welches Thema hält dich nachts wach?
               </p>
 
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
-                <input
-                  type="text"
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
-                  placeholder="z.B. KI-Superintelligenz, Hyperinflation..."
-                  required
-                  className="flex-1 bg-[#222] border border-neutral-700 rounded-lg px-6 py-4 text-white focus:outline-none focus:border-red-500/50 focus:bg-[#2A2A2A] transition-all"
-                />
-                <button
-                  type="submit"
-                  className="bg-white text-black font-medium px-8 py-4 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 active:scale-95 whitespace-nowrap"
-                >
-                  Erschaffen
-                </button>
-              </form>
+              {isOllamaOnline === false ? (
+                <div className="bg-red-950/20 border border-red-900/50 rounded-lg p-6 flex flex-col items-center justify-center text-center animate-in fade-in slide-in-from-bottom-4 duration-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-red-500 mb-3 opacity-80">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  <h3 className="text-red-500 font-vesper text-xl mb-2 tracking-wide uppercase">Der Äther schweigt</h3>
+                  <p className="text-neutral-400 text-sm leading-relaxed max-w-md">
+                    Die KI-Entität ist nicht erreichbar oder schläft.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="text"
+                    value={topic}
+                    onChange={(e) => setTopic(e.target.value)}
+                    placeholder={isOllamaOnline === null ? "Verbinde mit dem Äther..." : "z.B. KI-Superintelligenz, Hyperinflation..."}
+                    required
+                    disabled={isOllamaOnline === null}
+                    className="flex-1 bg-[#222] border border-neutral-700 rounded-lg px-6 py-4 text-white focus:outline-none focus:border-red-500/50 focus:bg-[#2A2A2A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  />
+                  <button
+                    type="submit"
+                    disabled={isOllamaOnline === null}
+                    className="bg-white text-black font-medium px-8 py-4 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 active:scale-95 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Erschaffen
+                  </button>
+                </form>
+              )}
               
               {error && (
                 <p className="text-red-500 text-sm font-semibold uppercase tracking-wider mt-4">

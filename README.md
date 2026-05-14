@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+### Docker Compose (Recommended)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repository
+git clone https://github.com/m8tec/dynamic-catastrophe.git
+cd dynamic-catastrophe
+
+# Configure
+cp .env.example .env
+nano .env  # Edit with your settings
+
+# Start
+docker compose up -d
+
+# Watch logs
+docker compose logs -f
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Building from Source
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+docker compose -f compose.local.yaml up -d --build
+docker compose -f compose.local.yaml logs -f
+docker compose -f compose.local.yaml down
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Active Development (Hot Reloading)
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+## GitHub Actions (Build + Deploy)
 
-To learn more about Next.js, take a look at the following resources:
+This repository contains two workflows:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `.github/workflows/build-image.yml`
+	- Builds a production Docker image and pushes it to GHCR (`ghcr.io/m8tec/dynamic-catastrophe`)
+- `.github/workflows/deploy-vps.yml`
+	- Runs after a successful image build and deploys `:latest` to a VPS over SSH using Docker Compose
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Required repository secrets:
 
-## Deploy on Vercel
+- `VPS_HOST`
+- `VPS_USER`
+- `VPS_SSH_KEY`
+- `VPS_PORT` (defaults to `22`)
+- `APP_PORT` (defaults to `3000`)
+- `APP_ENV_FILE` (optional absolute path to an env file on VPS, e.g. `/opt/dynamic-catastrophe/.env`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+VPS prerequisites:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Docker must be installed.
+- The SSH user must be allowed to run Docker commands.

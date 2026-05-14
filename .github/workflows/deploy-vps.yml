@@ -1,0 +1,72 @@
+name: Deploy to Debian VPS
+
+on:
+  workflow_run:
+    workflows:
+      - Build and Publish Image
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  deploy:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set image name
+        id: image
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy on VPS over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          IMAGE_NAME: ${{ steps.image.outputs.name }}
+          APP_PORT: ${{ secrets.APP_PORT }}
+          APP_ENV_FILE: ${{ secrets.APP_ENV_FILE }}
+          CONTAINER_NAME: dynamic-catastrophe
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || '22' }}
+          envs: IMAGE_NAME,APP_PORT,APP_ENV_FILE,CONTAINER_NAME
+          script: |
+            set -euo pipefail
+
+            IMAGE="${IMAGE_NAME}:latest"
+            PORT="${APP_PORT:-3000}"
+            DEPLOY_DIR="/opt/dynamic-catastrophe"
+            COMPOSE_FILE="$DEPLOY_DIR/compose.yaml"
+
+            mkdir -p "$DEPLOY_DIR"
+
+            printf '%s\n' \
+              'services:' \
+              '  app:' \
+              "    image: ${IMAGE}" \
+              "    container_name: ${CONTAINER_NAME}" \
+              '    restart: unless-stopped' \
+              '    ports:' \
+              "      - \"${PORT}:3000\"" \
+              > "$COMPOSE_FILE"
+
+            if [ -n "${APP_ENV_FILE:-}" ] && [ -f "${APP_ENV_FILE}" ]; then
+              printf '%s\n' \
+                '    env_file:' \
+                "      - ${APP_ENV_FILE}" \
+                >> "$COMPOSE_FILE"
+            fi
+
+            cd "$DEPLOY_DIR"
+            docker compose pull app
+            docker compose up -d --remove-orphans
+
+            docker image prune -f

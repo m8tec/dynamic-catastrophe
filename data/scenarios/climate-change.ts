@@ -5,7 +5,7 @@ export const data: ScenarioData = {
   title: "Klimawandel: Die nackte Wahrheit",
   description:
     "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'.",
-  teaserImage: "/images/scenarios/climate-change/teaser.png",
+  teaserImage: "/images/scenarios/climate-change/teaser.webp",
   theme: "default",
   scenario: [
     {

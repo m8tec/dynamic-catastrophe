@@ -14,10 +14,7 @@ async function getBackgroundImages() {
   const images = files
     .filter(
       (f) =>
-        f.endsWith(".png") ||
-        f.endsWith(".webp") ||
-        f.endsWith(".jpg") ||
-        f.endsWith(".jpeg"),
+        f.endsWith(".webp")
     )
     .map((f) => `/images/home/${f}`);
 

@@ -3,9 +3,12 @@
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { localizedPath } from "@/utils/localizedPath";
 
 export default function UploadScenario() {
   const t = useTranslations("UploadScenario");
+  const locale = useLocale();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -34,7 +37,7 @@ export default function UploadScenario() {
 
         sessionStorage.setItem("customScenario", JSON.stringify(parsedData));
 
-        router.push("/play/custom");
+        router.push(localizedPath(locale, "/play/custom"));
       } catch (err) {
         console.error("Error while parsing file:", err);
         setError(t("errorInvalidFile"));

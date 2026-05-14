@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
+import { localizedPath } from "@/utils/localizedPath";
 
 export default async function ScenarioCard({ scenario }: { scenario: any }) {
   const t = await getTranslations("ScenarioCard");
+  const locale = await getLocale();
 
   return (
     <Link
-      href={`/play/static/?scenario=${scenario.id}`}
+      href={localizedPath(locale, `/play/static?scenario=${scenario.id}`)}
       className="group relative flex flex-col justify-between rounded-xl border border-neutral-800 hover:border-red-500/50 overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-1 min-h-[240px]"
     >
       {scenario.teaserImage ? (

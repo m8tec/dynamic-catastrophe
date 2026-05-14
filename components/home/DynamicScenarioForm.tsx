@@ -3,9 +3,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
+import { localizedPath } from "@/utils/localizedPath";
 
 export default function DynamicScenarioForm() {
   const t = useTranslations("DynamicForm");
+  const locale = useLocale();
 
   const PHRASES = [
     t("phrases.0"),
@@ -69,7 +72,9 @@ export default function DynamicScenarioForm() {
       if (data.scenario) {
         const scenarioData = { ...data, prompt: topic };
         sessionStorage.setItem("dynamicScenario", JSON.stringify(scenarioData));
-        router.push(`/play/dynamic?prompt=${encodeURIComponent(topic)}`);
+        router.push(
+          localizedPath(locale, `/play/dynamic?prompt=${encodeURIComponent(topic)}`)
+        );
       } else {
         throw new Error("KI hat kein 'scenario' Array geliefert.");
       }

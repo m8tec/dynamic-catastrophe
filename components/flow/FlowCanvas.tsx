@@ -28,7 +28,7 @@ import RectangleNode from "@/components/flow/nodes/RectangleNode";
 
 import InteractiveEdge from "./edges/InteractiveEdge";
 
-import ScenarioSidebar from "@/components/flow/ScenarioSlider";
+import ScenarioSidebar from "@/components/flow/ScenarioSidebar";
 
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { THEMES, ThemeName } from "@/constants/theme";

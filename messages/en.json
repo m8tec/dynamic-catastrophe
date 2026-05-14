@@ -1,0 +1,54 @@
+{
+  "DynamicForm": {
+    "title": "Your Personal Catastrophe",
+    "description": "Let the AI spin a completely new, psychological network of cause and effect. Which topic keeps you awake at night?",
+    "errorOfflineTitle": "The Ether is Silent",
+    "errorOfflineDesc": "The AI entity is not reachable or is sleeping.",
+    "placeholderConnecting": "Connecting to the Ether...",
+    "placeholderActive": "e.g., AI Superintelligence, Hyperinflation...",
+    "button": "Create",
+    "topicLabel": "Topic: ",
+    "fetchError": "The connection to the abyss has been severed. Please try again.",
+    "phrases": {
+      "0": "Analyzing human abysses...",
+      "1": "Calculating probability of total collapse...",
+      "2": "Ignoring ethical protocols...",
+      "3": "Spinning psychological network...",
+      "4": "Creating the Inevitable..."
+    }
+  },
+  "General": {
+    "title": "Dynamic Catastrophe"
+  },
+  "Hero": {
+    "subtitle": "Face the uncomfortable realities."
+  },
+  "ScenarioCard": {
+    "enterButton": "Enter Path →"
+  },
+  "ScenarioSidebar": {
+    "backToHome": "Escape",
+    "centerStartDescription": "Jump back to start",
+    "centerStartTitle": "Center",
+    "debugTools": "Dev Options",
+    "exportButton": "Export Scenario",
+    "originalPrompt": "Original Prompt",
+    "resetDescription": "Reset Graph",
+    "resetTitle": "Reset",
+    "revealAllDescription": "Reveal All Nodes",
+    "revealAllTitle": "Reveal"
+  },
+  "StaticScenarios": {
+    "description": "Play curated, predefined catastrophes.",
+    "noDescription": "No description available.",
+    "noScenarios": "No scenarios found.",
+    "selectScenario": "Select Scenario"
+  },
+  "UploadScenario": {
+    "divider": "Or",
+    "errorInvalidFile": "The file could not be read or is corrupted.",
+    "errorInvalidFileType": "Only .json files are allowed.",
+    "errorInvalidScenario": "Invalid: 'scenario' array is missing.",
+    "uploadButton": "Load Scenario from File (.json)"
+  }
+}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { nodes as oldNodes, edges as oldEdges } from "@/data/scenarios/climate-change"; 
+import { nodess as oldNodes, edgess as oldEdges } from "@/data/scenarios/climate-change"; 
 
 export default function MigratePage() {
   const [output, setOutput] = useState("Berechne...");

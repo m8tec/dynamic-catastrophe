@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 export default async function ScenarioCard({ scenario }: { scenario: any }) {
+  const t = await getTranslations("ScenarioCard");
+
   return (
     <Link
       href={`/play/static/?scenario=${scenario.id}`}
@@ -32,7 +35,7 @@ export default async function ScenarioCard({ scenario }: { scenario: any }) {
         </div>
         
         <div className="mt-6 text-xs uppercase tracking-widest text-neutral-400 font-semibold group-hover:text-red-400 transition-colors">
-          Pfad betreten →
+          {t("enterButton")}
         </div>
       </div>
     </Link>

@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import ScenarioCard from "./ScenarioCard";
+import { getTranslations } from "next-intl/server";
 
 async function getAvailableScenarios() {
   const baseDir = fs.existsSync(path.join(process.cwd(), "src")) ? "src" : "";
@@ -13,6 +14,8 @@ async function getAvailableScenarios() {
 
   if (!fs.existsSync(scenariosDir)) return [];
 
+  const t = await getTranslations("StaticScenarios");
+
   const files = fs.readdirSync(scenariosDir).filter((f) => f.endsWith(".ts"));
   const scenarios = [];
 
@@ -23,7 +26,7 @@ async function getAvailableScenarios() {
       scenarios.push({
         id,
         title: module.data?.title || id,
-        description: module.data?.description || "Keine Beschreibung verfügbar.",
+        description: module.data?.description || t("noDescription"),
         teaserImage: module.data?.teaserImage || null,
       });
     } catch (e) {
@@ -35,6 +38,8 @@ async function getAvailableScenarios() {
 }
 
 export default async function StaticScenarios() {
+  const t = await getTranslations("StaticScenarios");
+
   const scenarios = await getAvailableScenarios();
 
   return (
@@ -44,15 +49,15 @@ export default async function StaticScenarios() {
           className="text-3xl md:text-4xl text-white"
           style={{ fontFamily: "var(--font-vesper)" }}
         >
-          Szenario wählen
+          {t("selectScenario")}
         </h2>
         <p className="text-neutral-500 mt-2">
-          Spiele kuratierte, vordefinierte Katastrophen durch.
+          {t("description")}
         </p>
       </div>
 
       {scenarios.length === 0 ? (
-        <p className="text-neutral-600 italic">Keine Szenarien gefunden.</p>
+        <p className="text-neutral-600 italic">{t("noScenarios")}</p>
       ) : (
         <div className="grid md:grid-cols-2 gap-6">
           {scenarios.map((scenario) => (

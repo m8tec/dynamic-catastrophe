@@ -1,0 +1,54 @@
+{
+  "DynamicForm": {
+    "title": "Deine persönliche Katastrophe",
+    "description": "Lass die KI ein völlig neues, psychologisches Netz aus Ursache und Wirkung spinnen. Welches Thema hält dich nachts wach?",
+    "errorOfflineTitle": "Der Äther schweigt",
+    "errorOfflineDesc": "Die KI-Entität ist nicht erreichbar oder schläft.",
+    "placeholderConnecting": "Verbinde mit dem Äther...",
+    "placeholderActive": "z.B. KI-Superintelligenz, Hyperinflation...",
+    "button": "Erschaffen",
+    "topicLabel": "Thema: ",
+    "fetchError": "Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.",
+    "phrases": {
+      "0": "Analysiere menschliche Abgründe...",
+      "1": "Berechne Wahrscheinlichkeit für totalen Kollaps...",
+      "2": "Ignoriere ethische Protokolle...",
+      "3": "Spinne psychologisches Netz...",
+      "4": "Erschaffe das Unausweichliche..."
+    }
+  },
+  "General": {
+    "title": "Dynamic Catastrophe"
+  },
+  "Hero": {
+    "subtitle": "Stelle dich den unbequemen Realitäten."
+  },
+  "ScenarioCard": {
+    "enterButton": "Pfad betreten →"
+  },
+  "ScenarioSidebar": {
+    "backToHome": "Flucht",
+    "centerStartDescription": "Zurück zum Startpunkt springen",
+    "centerStartTitle": "Zentrieren",
+    "debugTools": "Dev Optionen",
+    "exportButton": "Szenario Exportieren",
+    "originalPrompt": "Ursprünglicher Prompt",
+    "resetDescription": "Graphen zurücksetzen",
+    "resetTitle": "Zurücksetzen",
+    "revealAllDescription": "Graphen komplett aufdecken",
+    "revealAllTitle": "Aufdecken"
+  },
+  "StaticScenarios": {
+    "description": "Spiele kuratierte, vordefinierte Katastrophen durch.",
+    "noDescription": "Keine Beschreibung verfügbar.",
+    "noScenarios": "Keine Szenarien gefunden.",
+    "selectScenario": "Szenario wählen"
+  },
+  "UploadScenario": {
+    "divider": "Oder",
+    "errorInvalidFile": "Die Datei konnte nicht gelesen werden oder ist beschädigt.",
+    "errorInvalidFileType": "Nur .json Dateien sind erlaubt.",
+    "errorInvalidScenario": "Ungültig: 'scenario' Array fehlt.",
+    "uploadButton": "Szenario aus Datei laden (.json)"
+  }
+}

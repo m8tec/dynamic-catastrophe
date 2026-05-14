@@ -2,16 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-
-const PHRASES = [
-  "Analysiere menschliche Abgründe...",
-  "Berechne Wahrscheinlichkeit für totalen Kollaps...",
-  "Ignoriere ethische Protokolle...",
-  "Spinne psychologisches Netz...",
-  "Erschaffe das Unausweichliche...",
-];
+import { useTranslations } from "next-intl";
 
 export default function DynamicScenarioForm() {
+  const t = useTranslations("DynamicForm");
+
+  const PHRASES = [
+    t("phrases.0"),
+    t("phrases.1"),
+    t("phrases.2"),
+    t("phrases.3"),
+    t("phrases.4"),
+  ];
+
   const [topic, setTopic] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -43,7 +46,7 @@ export default function DynamicScenarioForm() {
       setPhraseIndex((prev) => (prev + 1) % PHRASES.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [isLoading]);
+  }, [isLoading, PHRASES.length]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +75,7 @@ export default function DynamicScenarioForm() {
       }
     } catch (err) {
       console.error("Fetch Error:", err);
-      setError("Die Verbindung zum Abgrund ist abgerissen. Bitte versuche es erneut.");
+      setError(t("fetchError"));
       setIsLoading(false);
       setIsOllamaOnline(false); 
     }
@@ -90,11 +93,10 @@ export default function DynamicScenarioForm() {
           {!isLoading ? (
             <div className="animate-in fade-in zoom-in-95 duration-500">
               <h2 className="text-3xl md:text-4xl text-white mb-4 font-vesper">
-                Deine persönliche Katastrophe
+                {t("title")}
               </h2>
               <p className="text-neutral-400 leading-relaxed mb-8">
-                Lass die KI ein völlig neues, psychologisches Netz aus Ursache und
-                Wirkung spinnen. Welches Thema hält dich nachts wach?
+                {t("description")}
               </p>
 
               {isOllamaOnline === false ? (
@@ -102,9 +104,11 @@ export default function DynamicScenarioForm() {
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-10 h-10 text-red-500 mb-3 opacity-80">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
-                  <h3 className="text-red-500 font-vesper text-xl mb-2 tracking-wide uppercase">Der Äther schweigt</h3>
+                  <h3 className="text-red-500 font-vesper text-xl mb-2 tracking-wide uppercase">
+                    {t("errorOfflineTitle")}
+                  </h3>
                   <p className="text-neutral-400 text-sm leading-relaxed max-w-md">
-                    Die KI-Entität ist nicht erreichbar oder schläft.
+                    {t("errorOfflineDesc")}
                   </p>
                 </div>
               ) : (
@@ -113,7 +117,7 @@ export default function DynamicScenarioForm() {
                     type="text"
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
-                    placeholder={isOllamaOnline === null ? "Verbinde mit dem Äther..." : "z.B. KI-Superintelligenz, Hyperinflation..."}
+                    placeholder={isOllamaOnline === null ? t("placeholderConnecting") : t("placeholderActive")}
                     required
                     disabled={isOllamaOnline === null}
                     className="flex-1 bg-[#222] border border-neutral-700 rounded-lg px-6 py-4 text-white focus:outline-none focus:border-red-500/50 focus:bg-[#2A2A2A] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -123,7 +127,7 @@ export default function DynamicScenarioForm() {
                     disabled={isOllamaOnline === null}
                     className="bg-white text-black font-medium px-8 py-4 rounded-lg hover:bg-red-500 hover:text-white transition-all duration-300 active:scale-95 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Erschaffen
+                    {t("button")}
                   </button>
                 </form>
               )}
@@ -137,7 +141,7 @@ export default function DynamicScenarioForm() {
           ) : (
             <div className="flex flex-col items-center justify-center py-4 space-y-4 animate-in fade-in zoom-in duration-500 text-center w-full">
               <h3 className="text-red-500/80 tracking-[0.2em] uppercase font-semibold text-sm">
-                Thema: {topic}
+                {t("topicLabel")}{topic} {/* <-- Übersetzt */}
               </h3>
 
               <div className="h-28 md:h-32 flex items-center justify-center w-full px-4">

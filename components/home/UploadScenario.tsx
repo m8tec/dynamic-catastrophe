@@ -2,8 +2,11 @@
 
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function UploadScenario() {
+  const t = useTranslations("UploadScenario");
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +18,7 @@ export default function UploadScenario() {
     if (!file) return;
 
     if (file.type !== "application/json" && !file.name.endsWith(".json")) {
-      setError("Nur .json Dateien sind erlaubt.");
+      setError(t("errorInvalidFileType"));
       return;
     }
 
@@ -26,15 +29,15 @@ export default function UploadScenario() {
         const parsedData = JSON.parse(content);
 
         if (!parsedData.scenario || !Array.isArray(parsedData.scenario)) {
-          throw new Error("Ungültiges: 'scenario' Array fehlt.");
+          throw new Error(t("errorInvalidScenario"));
         }
 
         sessionStorage.setItem("customScenario", JSON.stringify(parsedData));
 
         router.push("/play/custom");
       } catch (err) {
-        console.error("Fehler beim Parsen:", err);
-        setError("Die Datei konnte nicht gelesen werden oder ist beschädigt.");
+        console.error("Error while parsing file:", err);
+        setError(t("errorInvalidFile"));
       }
 
       if (fileInputRef.current) fileInputRef.current.value = "";
@@ -56,7 +59,7 @@ export default function UploadScenario() {
       <div className="flex flex-col items-center gap-3">
         <div className="flex items-center gap-4 w-full opacity-30">
           <div className="flex-1 h-px bg-neutral-500"></div>
-          <span className="text-xs uppercase tracking-widest font-bold">Oder</span>
+          <span className="text-xs uppercase tracking-widest font-bold">{t("divider")}</span>
           <div className="flex-1 h-px bg-neutral-500"></div>
         </div>
 
@@ -78,7 +81,7 @@ export default function UploadScenario() {
               d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
             />
           </svg>
-          Szenario aus Datei laden (.json)
+          {t("uploadButton")}
         </button>
 
         {error && (

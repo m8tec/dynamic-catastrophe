@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import BackgroundSlider from "./BackgroundSlider";
+import { getTranslations } from "next-intl/server";
 
 async function getBackgroundImages() {
   const imagesDir = path.join(process.cwd(), "public", "images", "home");
@@ -26,6 +27,8 @@ async function getBackgroundImages() {
 export default async function HeroBanner() {
   const backgroundImages = await getBackgroundImages();
 
+  const t = await getTranslations();
+
   return (
     <section className="relative w-full h-[55vh] flex flex-col items-center justify-center overflow-hidden">
       <BackgroundSlider images={backgroundImages} />
@@ -40,14 +43,14 @@ export default async function HeroBanner() {
             className="text-5xl md:text-7xl opacity-0 whitespace-nowrap pointer-events-none pr-2"
             style={{ fontFamily: "var(--font-vesper)" }}
           >
-            Dynamic Catastrophe
+            {t("General.title")}
           </h1>
           
           <h1
             className="col-start-1 row-start-1 text-5xl md:text-7xl text-white whitespace-nowrap overflow-hidden border-r-4 border-white pr-2 animate-typewriter"
             style={{ fontFamily: "var(--font-vesper)" }}
           >
-            Dynamic Catastrophe
+            {t("General.title")}
           </h1>
           
         </div>
@@ -59,7 +62,7 @@ export default async function HeroBanner() {
             fontFamily: "var(--font-vesper)",
           }}
         >
-          Stelle dich den unbequemen Realitäten.
+          {t("Hero.subtitle")}
         </p>
       </div>
     </section>

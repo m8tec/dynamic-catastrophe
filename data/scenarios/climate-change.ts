@@ -1,10 +1,18 @@
 import { ScenarioData } from "@/types/scenario";
 import { StaticNode, StaticEdge } from "@/types/static";
 
+export const translations = {
+  de: {
+    title: "Klimawandel: Die nackte Wahrheit",
+    description: "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'."
+  },
+  en: {
+    title: "Climate Change: The Naked Truth",
+    description: "Have you accepted our fate yet? The original scenario from 'I Want a Better Catastrophe'."
+  }
+};
+
 export const data: ScenarioData = {
-  title: "Klimawandel: Die nackte Wahrheit",
-  description:
-    "Hast du unser Schicksal schon akzeptiert? Das Original-Szenario von 'I Want a Better Catastrophe'.",
   teaserImage: "/images/scenarios/climate-change/teaser.webp",
   theme: "default",
   scenario: [

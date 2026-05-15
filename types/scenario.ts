@@ -15,8 +15,6 @@ export interface ScenarioNode {
 }
 
 export interface ScenarioData {
-  title: string;
-  description: string;
   theme?: ThemeName;
   teaserImage?: string;
   scenario: ScenarioNode[];

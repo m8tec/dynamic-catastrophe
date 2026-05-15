@@ -2,8 +2,9 @@ import fs from "fs";
 import path from "path";
 import ScenarioCard from "./ScenarioCard";
 import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 
-async function getAvailableScenarios() {
+async function getAvailableScenarios(locale: string, t: any) {
   const baseDir = fs.existsSync(path.join(process.cwd(), "src")) ? "src" : "";
   const scenariosDir = path.join(
     process.cwd(),
@@ -14,8 +15,6 @@ async function getAvailableScenarios() {
 
   if (!fs.existsSync(scenariosDir)) return [];
 
-  const t = await getTranslations("StaticScenarios");
-
   const files = fs.readdirSync(scenariosDir).filter((f) => f.endsWith(".ts"));
   const scenarios = [];
 
@@ -23,10 +22,11 @@ async function getAvailableScenarios() {
     const id = file.replace(".ts", "");
     try {
       const module = await import(`@/data/scenarios/${file}`);
+      const scenarioTranslations = module.translations?.[locale] || module.translations?.de;
       scenarios.push({
         id,
-        title: module.data?.title || id,
-        description: module.data?.description || t("noDescription"),
+        title: scenarioTranslations?.title || id,
+        description: scenarioTranslations?.description || t("noDescription"),
         teaserImage: module.data?.teaserImage || null,
       });
     } catch (e) {
@@ -39,8 +39,9 @@ async function getAvailableScenarios() {
 
 export default async function StaticScenarios() {
   const t = await getTranslations("StaticScenarios");
+  const locale = await getLocale();
 
-  const scenarios = await getAvailableScenarios();
+  const scenarios = await getAvailableScenarios(locale, t);
 
   return (
     <section className="max-w-5xl mx-auto px-6 pt-20">

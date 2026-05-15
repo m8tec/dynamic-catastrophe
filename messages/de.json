@@ -38,6 +38,14 @@
     "revealAllDescription": "Graphen komplett aufdecken",
     "revealAllTitle": "Aufdecken"
   },
+  "StaticScenario": {
+    "notFoundDescription": "Das Szenario {scenario} existiert nicht. Vielleicht hat die Apokalypse es bereits verschlungen.",
+    "notFoundMetadataDescription": "Das angeforderte Szenario wurde nicht gefunden.",
+    "notFoundMetadataTitle": "Nicht gefunden",
+    "notFoundTitle": "Szenario verschollen",
+    "unknown": "Unbekannt",
+    "unknownScenario": "Unbekanntes Szenario"
+  },
   "StaticScenarios": {
     "description": "Spiele kuratierte, vordefinierte Katastrophen durch.",
     "noDescription": "Keine Beschreibung verfügbar.",

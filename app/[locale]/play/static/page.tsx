@@ -1,23 +1,28 @@
 import FlowCanvas from "@/components/flow/FlowCanvas";
 import { getStaticScenario } from "@/lib/staticData";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { parseScenarioToFlow } from "@/utils/scenarioParser";
 import LoadingError from "@/components/play/LoadingError";
+import { getLocale } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   searchParams,
 }: {
   searchParams: Promise<{ scenario?: string; }>;
 }): Promise<Metadata> {
-  const { scenario } = await searchParams;
-  const data = getStaticScenario(scenario);
+  const t = await getTranslations("StaticScenario");
+  const generalT = await getTranslations("General");
+  const locale = await getLocale();
 
-  let title = "Nicht gefunden | Dynamic Catastrophe";
-  let description = "Das angeforderte Szenario wurde nicht gefunden.";
+  const { scenario } = await searchParams;
+  const data = getStaticScenario(scenario, locale);
+
+  let title = `${t("notFoundTitle")} | ${generalT("title")}`;
+  let description = t("notFoundMetadataDescription")
 
   if (data) {
-    title = `${data.metadata.title} | Dynamic Catastrophe`;
+    title = `${data.metadata.title} | ${generalT("title")}`;
     description = data.metadata.description;
   }
 
@@ -34,13 +39,17 @@ export default async function PlayPage({
   searchParams: Promise<{ mode?: string; scenario?: string; topic?: string }>;
 }) {
   const { scenario } = await searchParams;
-  const data = getStaticScenario(scenario);
+
+  const locale = await getLocale();
+  const t = await getTranslations("StaticScenario");
+
+  const data = getStaticScenario(scenario, locale);
 
   if (!data) {
     return (
       <LoadingError 
-        title="Szenario verschollen"
-        message={`Das Szenario "${scenario || 'Unbekannt'}" existiert nicht. Vielleicht hat die Apokalypse es bereits verschlungen.`} 
+        title={t("notFoundTitle")}
+        message={t("notFoundDescription", { scenario: scenario || t("unknown") })} 
       />
     );
   }
@@ -50,7 +59,7 @@ export default async function PlayPage({
   return (
     <main className="w-full h-screen bg-[#121212]">
       <FlowCanvas
-        title={data.metadata.title || "Unbekanntes Szenario"}
+        title={data.metadata.title || t("unknownScenario")}
         description={data.metadata.description}
         teaserImage={data.metadata.teaserImage}
         theme={data.metadata.theme}

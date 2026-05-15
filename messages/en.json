@@ -38,6 +38,14 @@
     "revealAllDescription": "Reveal All Nodes",
     "revealAllTitle": "Reveal"
   },
+  "StaticScenario": {
+    "notFoundDescription": "The scenario {scenario} does not exist. Perhaps the apocalypse has already consumed it.",
+    "notFoundMetadataDescription": "The requested scenario was not found.",
+    "notFoundMetadataTitle": "Not Found",
+    "notFoundTitle": "Scenario Lost",
+    "unknown": "Unknown",
+    "unknownScenario": "Unknown Scenario"
+  },
   "StaticScenarios": {
     "description": "Play curated, predefined catastrophes.",
     "noDescription": "No description available.",

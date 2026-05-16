@@ -64,7 +64,7 @@ export default function AmbientAudio({ src }: AmbientAudioProps) {
 
       <button
         onClick={toggleMute}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2 bg-black/50 hover:bg-black/80 backdrop-blur-md border border-neutral-800 rounded-full text-xs uppercase tracking-widest text-neutral-400 hover:text-red-500 transition-all duration-300"
+        className="flex items-center gap-2 px-4 py-2 bg-black/50 hover:bg-black/80 backdrop-blur-md border border-neutral-800 rounded-full text-xs uppercase tracking-widest text-neutral-400 hover:text-red-500 transition-all duration-300 h-full"
       >
         <span className="relative flex h-2 w-2">
           {isPlaying && (

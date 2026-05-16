@@ -22,6 +22,11 @@ async function getAvailableScenarios(locale: string, t: any) {
     const id = file.replace(".ts", "");
     try {
       const module = await import(`@/data/scenarios/${file}`);
+      
+      if (module.data?.hidden) {
+        continue;
+      }
+
       const scenarioTranslations = module.translations?.[locale] || module.translations?.de;
       scenarios.push({
         id,

@@ -20,3 +20,10 @@ export interface ScenarioData {
   hidden?: boolean;
   scenario: ScenarioNode[];
 }
+
+export interface ScenarioMetadata {
+  id: string;
+  title: string;
+  description: string;
+  teaserImage: string | null;
+}

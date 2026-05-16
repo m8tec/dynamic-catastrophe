@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
+import { ThemeColors } from "@/constants/theme";
 
 interface SidebarExportButtonProps {
   onExport: () => void;
-  theme: any;
+  theme: ThemeColors;
 }
 
 export default function SidebarExportButton({

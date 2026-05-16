@@ -1,5 +1,6 @@
 import { TYPOGRAPHY } from "@/constants/theme";
 import { useTranslations } from "next-intl";
+import { ThemeColors } from "@/constants/theme";
 
 interface SidebarInfoProps {
   title: string;
@@ -7,7 +8,7 @@ interface SidebarInfoProps {
   description: string;
   isDynamic: boolean;
   prompt?: string;
-  theme: any;
+  theme: ThemeColors;
 }
 
 export default function SidebarInfo({
@@ -66,7 +67,7 @@ export default function SidebarInfo({
               fontFamily: TYPOGRAPHY.nodeFontFamily,
             }}
           >
-            "{prompt}"
+            &ldquo;{prompt}&rdquo;
           </div>
         </div>
       )}

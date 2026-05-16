@@ -1,7 +1,9 @@
+import { ThemeColors } from "@/constants/theme";
+
 interface SidebarToggleButtonProps {
   isOpen: boolean;
   onToggle: () => void;
-  theme: any;
+  theme: ThemeColors;
   sidebarBg: string;
 }
 

@@ -4,7 +4,7 @@ import ScenarioCard from "./ScenarioCard";
 import { getTranslations } from "next-intl/server";
 import { getLocale } from "next-intl/server";
 
-async function getAvailableScenarios(locale: string, t: any) {
+async function getAvailableScenarios(locale: string, t: (key: string) => string) {
   const baseDir = fs.existsSync(path.join(process.cwd(), "src")) ? "src" : "";
   const scenariosDir = path.join(
     process.cwd(),
@@ -21,18 +21,18 @@ async function getAvailableScenarios(locale: string, t: any) {
   for (const file of files) {
     const id = file.replace(".ts", "");
     try {
-      const module = await import(`@/data/scenarios/${file}`);
+      const scenarioFile = await import(`@/data/scenarios/${file}`);
       
-      if (module.data?.hidden) {
+      if (scenarioFile.data?.hidden) {
         continue;
       }
 
-      const scenarioTranslations = module.translations?.[locale] || module.translations?.de;
+      const scenarioTranslations = scenarioFile.translations?.[locale] || scenarioFile.translations?.de;
       scenarios.push({
         id,
         title: scenarioTranslations?.title || id,
         description: scenarioTranslations?.description || t("noDescription"),
-        teaserImage: module.data?.teaserImage || null,
+        teaserImage: scenarioFile.data?.teaserImage || null,
       });
     } catch (e) {
       console.error(`Konnte Metadaten für ${file} nicht laden.`, e);

@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ScenarioNode, ScenarioOption } from "@/types/scenario";
 import { nodess as oldNodes, edgess as oldEdges } from "@/data/scenarios/climate-change"; 
 
 export default function MigratePage() {
   const [output, setOutput] = useState("Berechne...");
 
   useEffect(() => {
-    const finalNodes: any[] = [];
+    const finalNodes: ScenarioNode[] = []; 
     const processedIds = new Set<string>();
 
     const queue = oldNodes.filter(
@@ -19,7 +20,7 @@ export default function MigratePage() {
       if (processedIds.has(curr.id)) continue;
       processedIds.add(curr.id);
 
-      const options = [];
+      const options: ScenarioOption[] = [];
       const outgoingEdges = oldEdges.filter((e) => e.source === curr.id);
 
       for (const edge of outgoingEdges) {
@@ -27,7 +28,7 @@ export default function MigratePage() {
         if (!targetNode) continue;
 
         if (targetNode.type === "option" || targetNode.type === "options") {
-          const text = targetNode.data.label;
+          const text = String(targetNode.data?.label || "");
           const targetOutgoingEdges = oldEdges.filter((e) => e.source === targetNode.id);
           
           let nextId: string | undefined = undefined; 
@@ -38,7 +39,8 @@ export default function MigratePage() {
 
             if (nextTargetNode && (nextTargetNode.type === "option" || nextTargetNode.type === "options")) {
               const modifiedNode = { ...nextTargetNode, type: "rectangle" };
-              queue.push(modifiedNode);
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              queue.push(modifiedNode as any); 
             }
           }
 
@@ -50,12 +52,13 @@ export default function MigratePage() {
 
       finalNodes.push({
         id: curr.id,
-        type: curr.type,
-        text: curr.data?.label || "",
+        type: curr.type as ScenarioNode["type"],
+        text: String(curr.data?.label || ""),
         options: options,
       });
     }
     
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setOutput(JSON.stringify(finalNodes, null, 2));
   }, []);
 

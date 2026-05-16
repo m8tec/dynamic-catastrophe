@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/hooks/useLanguage";
+import { ThemeColors } from "@/constants/theme";
 
-export default function SidebarLanguageToggle({ theme }: { theme: any }) {
+export default function SidebarLanguageToggle({ theme }: { theme: ThemeColors }) {
   const { currentLocale, switchTo, locales } = useLanguage();
   
   const [isOpen, setIsOpen] = useState(false);

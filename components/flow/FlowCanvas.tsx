@@ -36,6 +36,8 @@ import { THEMES, ThemeName } from "@/constants/theme";
 import { initializeFlowState } from "@/utils/flowInit";
 import { getLayoutedElements } from "@/utils/layout";
 
+import { ScenarioNode } from "@/types/scenario";
+
 const nodeTypes = {
   circle: CircleNode,
   cloud: CloudNode,
@@ -59,7 +61,7 @@ interface FlowCanvasProps {
   initialEdges: Edge[];
   isDynamicMode?: boolean;
   prompt?: string;
-  rawScenario?: any[];
+  rawScenario?: ScenarioNode[];
   startNodeId?: string;
   teaserImage?: string;
   theme?: ThemeName;
@@ -89,6 +91,7 @@ export default function FlowCanvas({
   const currentTheme = theme ? THEMES[theme] || THEMES.default : THEMES.default;
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMounted(true);
   }, []);
 
@@ -101,6 +104,7 @@ export default function FlowCanvas({
         preparedEdges,
       );
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setNodes(layoutedNodes);
       setEdges(layoutedEdges);
     }
@@ -167,7 +171,7 @@ export default function FlowCanvas({
 
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
-  }, [title, theme, nodes, edges]);
+  }, [title, description, prompt, theme, rawScenario]);
 
   const handleRevealAll = useCallback(() => {
     setNodes((nds) =>
@@ -209,6 +213,7 @@ export default function FlowCanvas({
     if (hasCentered || !rfInstance || nodes.length === 0) return;
 
     handleCenterStart();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHasCentered(true);
   }, [rfInstance, nodes, hasCentered, handleCenterStart]);
 

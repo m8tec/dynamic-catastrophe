@@ -32,7 +32,7 @@ export default function DynamicScenarioForm() {
       try {
         const res = await fetch("/api/health");
         setIsOllamaOnline(res.ok);
-      } catch (err) {
+      } catch {
         setIsOllamaOnline(false);
       }
     };

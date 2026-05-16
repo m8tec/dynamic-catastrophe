@@ -2,8 +2,13 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { getLocale } from "next-intl/server";
 import { localizedPath } from "@/utils/localizedPath";
+import { ScenarioMetadata } from "@/types/scenario";
 
-export default async function ScenarioCard({ scenario }: { scenario: any }) {
+interface ScenarioCardProps {
+  scenario: ScenarioMetadata;
+}
+
+export default async function ScenarioCard({ scenario }: ScenarioCardProps) {
   const t = await getTranslations("ScenarioCard");
   const locale = await getLocale();
 

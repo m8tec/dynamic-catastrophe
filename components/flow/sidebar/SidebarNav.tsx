@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { ThemeColors } from "@/constants/theme";
 
 interface SidebarNavProps {
-  theme: any;
+  theme: ThemeColors;
 }
 
 export default function SidebarNav({ theme }: SidebarNavProps) {

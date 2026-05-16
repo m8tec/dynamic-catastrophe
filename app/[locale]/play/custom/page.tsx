@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import FlowCanvas from "@/components/flow/FlowCanvas";
 import { parseScenarioToFlow } from "@/utils/scenarioParser";
 import { ThemeName } from "@/constants/theme";
+import { ScenarioNode } from "@/types/scenario";
 
 interface CustomScenarioData {
   title: string;
   description: string;
   prompt?: string;
   theme?: ThemeName;
-  scenario: any[];
+  scenario: ScenarioNode[];
 }
 
 export default function CustomPlayPage() {
@@ -19,6 +20,7 @@ export default function CustomPlayPage() {
   useEffect(() => {
     const stored = sessionStorage.getItem("customScenario");
     if (stored) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setData(JSON.parse(stored));
     }
   }, []);

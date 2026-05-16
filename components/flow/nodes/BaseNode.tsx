@@ -69,7 +69,7 @@ export default function BaseNode({
 
     setNodes((nodes) =>
       nodes.map((node) => {
-        let newData = { ...node.data };
+        const newData = { ...node.data };
 
         if (node.id === id) {
           newData.isActive = true;
@@ -97,7 +97,7 @@ export default function BaseNode({
 
     setEdges((currentEdges) =>
       currentEdges.map((edge) => {
-        let newData = { ...edge.data };
+        const newData = { ...edge.data };
 
         if (edge.source === id) {
           newData.isSelectable = true;

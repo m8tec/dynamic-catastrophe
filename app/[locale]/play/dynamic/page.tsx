@@ -5,12 +5,13 @@ import FlowCanvas from "@/components/flow/FlowCanvas";
 import LoadingError from "@/components/play/LoadingError";
 import { parseScenarioToFlow } from "@/utils/scenarioParser";
 import { ThemeName } from "@/constants/theme";
+import { ScenarioNode } from "@/types/scenario";
 
 interface DynamicData {
   title: string;
   description: string;
   theme: ThemeName;
-  scenario: any[];
+  scenario: ScenarioNode[];
   prompt?: string;
 }
 
@@ -21,6 +22,7 @@ export default function DynamicPlayPage() {
   useEffect(() => {
     const stored = sessionStorage.getItem("dynamicScenario");
     if (stored) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setData(JSON.parse(stored));
     }
     setIsMounted(true);

@@ -1,7 +1,7 @@
-import { BaseEdge, EdgeProps, useInternalNode } from '@xyflow/react';
+import { BaseEdge, EdgeProps, useInternalNode, InternalNode } from '@xyflow/react';
 import { useTheme } from "@/contexts/ThemeContext";
 
-function getPointOnBoundary(node: any, angle: number) {
+function getPointOnBoundary(node: InternalNode, angle: number) {
   const w = (node.measured?.width || node.width || 0) / 2;
   const h = (node.measured?.height || node.height || 0) / 2;
   const cx = (node.internals?.positionAbsolute?.x || node.position.x) + w;
@@ -28,14 +28,14 @@ function getPointOnBoundary(node: any, angle: number) {
 }
 
 export default function InteractiveEdge({
-  id, source, target, data, style, markerEnd
+  id, source, target, data, style
 }: EdgeProps) {
   const sourceNode = useInternalNode(source);
   const targetNode = useInternalNode(target);
 
-  if (!sourceNode || !targetNode) return null;
-
   const COLORS = useTheme();
+
+  if (!sourceNode || !targetNode) return null;
 
   const isSelectable = data?.isSelectable as boolean; 
   const isDiscovered = data?.isDiscovered as boolean;
@@ -44,7 +44,7 @@ export default function InteractiveEdge({
   const isVisible = isDiscovered || isTeased;
   const showArrow = targetNode.type !== 'option';
 
-  let color = isSelectable ? COLORS.pathActive : isDiscovered ? COLORS.pathInactive : COLORS.nodeBackgroundUndiscovered;
+  const color = isSelectable ? COLORS.pathActive : isDiscovered ? COLORS.pathInactive : COLORS.nodeBackgroundUndiscovered;
 
   const sxCenter = (sourceNode.internals?.positionAbsolute?.x || sourceNode.position.x) + (sourceNode.measured?.width || 0) / 2;
   const syCenter = (sourceNode.internals?.positionAbsolute?.y || sourceNode.position.y) + (sourceNode.measured?.height || 0) / 2;

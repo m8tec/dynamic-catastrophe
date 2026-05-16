@@ -12,7 +12,7 @@ export async function GET() {
       return NextResponse.json({ status: "online" }, { status: 200 });
     }
     throw new Error("Ollama not responding properly");
-  } catch (error) {
+  } catch {
     return NextResponse.json({ status: "offline" }, { status: 503 });
   }
 }

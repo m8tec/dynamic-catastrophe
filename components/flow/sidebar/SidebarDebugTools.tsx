@@ -1,10 +1,11 @@
 import { useTranslations } from "next-intl";
+import { ThemeColors } from "@/constants/theme";
 
 interface SidebarDebugToolsProps {
   onRevealAll: () => void;
   onCenterStart: () => void;
   onReset: () => void;
-  theme: any;
+  theme: ThemeColors;
 }
 
 export default function SidebarDebugTools({

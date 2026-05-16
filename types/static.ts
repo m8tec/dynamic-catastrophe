@@ -4,7 +4,7 @@ export interface StaticNode {
   id: string;
   type: string;
   position?: { x: number; y: number };
-  data: any;
+  data: Record<string, unknown>;
 }
 
 export interface StaticEdge {
@@ -17,7 +17,7 @@ export interface StaticEdge {
 export function normalizeStaticNodes(nodes: StaticNode[]): Node[] {
   return (nodes || []).map((n) => ({
     id: n.id,
-    type: (n as any).type,
+    type: n.type,
     position: n.position || { x: 0, y: 0 },
     data: n.data || {},
   } as Node));
